@@ -1,0 +1,17 @@
+:root {
+    --bg-color-main: #282828;
+    --bg-color-header-footer: #1e1e1e;
+    --text-color-default: #ffffff;
+    --text-color-menu-item: #e7e0e5;
+}
+
+body{
+    background-color: var(--bg-color-main);
+}
+
+#footer{
+    background-color: var(--bg-color-header-footer);
+}
+#footer{
+    background-color: var(--bg-color-header-footer);
+}
