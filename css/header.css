@@ -1,0 +1,80 @@
+#header{
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+    height: 100vh;
+    width: 100%;
+    animation: fadeIn 3s;
+}
+#masthead{
+    height: 100%;
+    width: 100%;
+}
+#mainNav {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    background-color: transparent;
+    z-index: 2;
+}
+#mainNav.navbar-shrink {
+    background-color: var(--bg-color-header-footer);
+}
+#logo_header{
+    height: 60px;
+}
+#logo_header > a > img {
+    max-height: 100%;
+}
+
+#mainNav .navbar-brand {
+    font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+    color: var(--text-color-menu-item);
+}
+
+#mainNav .navbar-nav .nav-item .nav-link {
+    color: #6c757d;
+    font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.75rem 0;
+}
+
+#mainNav {
+    box-shadow: none;
+    background-color: transparent;
+}
+
+#mainNav .navbar-brand {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#mainNav .navbar-brand:hover {
+    color: #fff;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0 1rem;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link:hover {
+    color: #fff;
+}
+
+#mainNav .navbar-nav .nav-item:last-child .nav-link {
+    padding-right: 0;
+}
+
+#mainNav.navbar-shrink .navbar-brand {
+    color: var(--text-color-menu-item);
+}
+
+/*hiện dần*/
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

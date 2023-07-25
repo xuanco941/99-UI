@@ -7,10 +7,14 @@ window.addEventListener('DOMContentLoaded', event => {
         if (!navbarCollapsible) {
             return;
         }
-        if (window.scrollY === 0) {
-            navbarCollapsible.classList.remove('navbar-shrink')
+        if (window.scrollY <= 103) {
+            navbarCollapsible.classList.remove('navbar-shrink');
+            navbarCollapsible.classList.remove('fixed-top');
+            navbarCollapsible.classList.add('position-relative');
         } else {
-            navbarCollapsible.classList.add('navbar-shrink')
+            navbarCollapsible.classList.add('navbar-shrink');
+            navbarCollapsible.classList.add('fixed-top');
+            navbarCollapsible.classList.remove('position-relative');
         }
 
     };
@@ -20,15 +24,5 @@ window.addEventListener('DOMContentLoaded', event => {
 
     // Shrink the navbar when page is scrolled
     document.addEventListener('scroll', navbarShrink);
-
-    // Activate Bootstrap scrollspy on the main nav element
-    const mainNav = document.body.querySelector('#mainNav');
-    if (mainNav) {
-        new bootstrap.ScrollSpy(document.body, {
-            target: '#mainNav',
-            rootMargin: '0px 0px -40%',
-        });
-    };
-
 
 });
