@@ -10,37 +10,20 @@
     width: 100%;
 }
 #mainNav {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); */
     background-color: transparent;
     z-index: 2;
 }
 #mainNav.navbar-shrink {
     background-color: var(--bg-color-header-footer);
 }
-#logo_header{
+.logo_header{
     height: 60px;
 }
-#logo_header > a > img {
-    max-height: 100%;
-}
-
 #mainNav .navbar-brand {
     font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-weight: 700;
     color: var(--text-color-menu-item);
-}
-
-#mainNav .navbar-nav .nav-item .nav-link {
-    color: #6c757d;
-    font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-weight: 700;
-    font-size: 1rem;
-    padding: 0.75rem 0;
-}
-
-#mainNav {
-    box-shadow: none;
-    background-color: transparent;
 }
 
 #mainNav .navbar-brand {
@@ -51,14 +34,32 @@
     color: #fff;
 }
 
-#mainNav .navbar-nav .nav-item .nav-link {
-    color: rgba(255, 255, 255, 0.7);
-    padding: 0 1rem;
+.nav-item {
+    color: #6c757d;
+    font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.75rem 0;
+    position: relative;
 }
 
-#mainNav .navbar-nav .nav-item .nav-link:hover {
+.nav-item:hover {
     color: #fff;
 }
+.nav-item::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #fff;
+    transition: width 0.5s;
+  }
+  
+  .nav-item:hover::before {
+    width: 100%;
+  }
 
 #mainNav .navbar-nav .nav-item:last-child .nav-link {
     padding-right: 0;
@@ -67,14 +68,42 @@
 #mainNav.navbar-shrink .navbar-brand {
     color: var(--text-color-menu-item);
 }
+#nav-pc:hover {
+    background-color: var(--bg-color-header-footer);
+}
 
+.animate-fadeIn{
+    animation: fadeIn 1s;
+}
+#nav-mobile{
+    display: none;
+}
+#nav-mobile > .container-xxl{
+    background-color: var(--bg-color-header-footer);
+}
 /*hiện dần*/
 @keyframes fadeIn {
     from {
         opacity: 0;
     }
-
     to {
         opacity: 1;
     }
 }
+
+
+
+@media (max-width: 992px) { 
+    #nav-pc{
+        display: none;
+    }
+    #nav-mobile{
+        display: block;
+        background-color: var(--bg-color-header-footer);
+        color: var(--text-color-default)
+    }
+    #btnShowMenu{
+        color: var(--text-color-default);
+    }
+    
+ }
