@@ -1,4 +1,6 @@
-window.addEventListener('DOMContentLoaded', event => {
+// DOMContentLoaded cây Dom sẵn sàng
+
+window.addEventListener('load', event => {
 
     // Navbar shrink function
 
@@ -25,15 +27,17 @@ window.addEventListener('DOMContentLoaded', event => {
     // Shrink the navbar when page is scrolled
     document.addEventListener('scroll', navbarShrink);
 
+    let btnShowMenu = document.querySelector('#btnShowMenu');
+    btnShowMenu.addEventListener('click', () => {
+        if (btnShowMenu.classList.contains('collapsed') == false) {
+            btnShowMenu.innerHTML = '<i class="bi bi-x bi-xxl"></i>';
+        }
+        else {
+            btnShowMenu.innerHTML = '<i class="bi bi-list bi-xl"></i>';
+        }
+    });
 
 
-    const gifImage = document.getElementById("masthead_img");
-
-    gifImage.src = "./assets/masthead.gif";
-    setTimeout(function () {
-        gifImage.classList.add('animate-fadeIn');
-        gifImage.src = "./assets/last_frame.png";
-    }, 6280);
 
 });
 

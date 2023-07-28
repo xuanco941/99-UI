@@ -20,6 +20,10 @@ body {
     background-color: var(--bg-color-header-footer);
 }
 
+.bi-xxl {
+    font-size: 30px;
+}
+
 .bi-xl {
     font-size: 25px;
 }
@@ -39,6 +43,10 @@ li {
 }
 a{
     text-decoration: none;
+    color: var(--text-color-menu-item);
+}
+a:hover{
+    color: var(--text-color-default);
 }
 .btn:first-child:active{
     border-color: transparent;

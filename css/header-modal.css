@@ -2,16 +2,16 @@
     background-color: var(--bg-color-main);
 }
 
-.btn_close{
+.btn_close_modal{
     color: var(--text-color-menu-item);
 }
-.btn_close:hover{
+.btn_close_modal:hover{
     color: var(--text-color-default);
 }
 
-.btn-footer {
+.btn-footer_modal {
     color: var(--color-highlight);
-    background-color: #737373;
+    background-color: var(--bg-color-header-footer);
     font-weight: 600;
     font-size: 16px;
     width: 12em;
@@ -26,7 +26,7 @@
     margin: 1em;
 }
 
-.btn-footer span {
+.btn-footer_modal span {
     position: absolute;
     width: 25%;
     height: 100%;
@@ -39,26 +39,39 @@
     z-index: -1;
 }
 
-.btn-footer:hover {
+.btn-footer_modal:hover {
     color: black;
 }
 
-.btn-footer:hover span {
+.btn-footer_modal:hover span {
     transform: translateY(0) scale(2);
 }
 
-.btn-footer span:nth-child(1) {
+.btn-footer_modal span:nth-child(1) {
     --n: 1;
 }
 
-.btn-footer span:nth-child(2) {
+.btn-footer_modal span:nth-child(2) {
     --n: 2;
 }
 
-.btn-footer span:nth-child(3) {
+.btn-footer_modal span:nth-child(3) {
     --n: 3;
 }
 
 nav ul li span:nth-child(4) {
     --n: 4;
 }
+
+
+.modal-dialog-header{
+    width: 400px;
+}
+
+
+@media (max-width: 992px) { 
+    .modal-dialog-header{
+        width: 100%;
+    }
+    
+ }

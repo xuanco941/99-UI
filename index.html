@@ -20,7 +20,8 @@
 <body>
     <header id="header">
         <div id="masthead" style="position: absolute; z-index: -999;">
-            <img id="masthead_img" src="./assets/last_frame.png" alt="" srcset="">
+            <video autoplay muted id="masthead_video" src="./assets/masthead.mp4"></video>
+            <!-- <img  src="./assets/masthead.gif" alt="" srcset=""> -->
         </div>
         <div id="nav-pc">
             <div class="container-xxl d-flex justify-content-end py-1 gap-3" id="link_header">
@@ -55,7 +56,7 @@
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                     </ul>
-                    <span role="button" class="navbar-brand m-0">
+                    <span role="button" data-bs-toggle="modal" data-bs-target="#ModalCard" class="navbar-brand m-0">
                         <i class="bi bi-bag bi-xl position-relative">
                             <span class="position-absolute bg-light d-flex justify-content-center align-items-center"
                                 style="width: 16px; height: 16px; bottom: -1px; left: -3px; border-radius: 100%; font-size: 12px; color: black; font-weight: 400;">
@@ -70,17 +71,33 @@
         </div>
         <div id="nav-mobile">
             <div class="fixed-top container-xxl py-2 d-flex justify-content-between align-items-center">
-                <div style="width: 56px;">
-                    <button class="btn px-0 navbar-brand" id="btnShowMenu">
+                <div style="width: 64px;" class="position-relative">
+                    <button class="btn px-0 navbar-brand" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#menu_mobile" aria-expanded="false" aria-controls="menu_mobile"
+                        id="btnShowMenu">
                         <i class="bi bi-list bi-xl"></i>
                     </button>
+                    <div class="collapse position-fixed" style="width: 100%; left: 0; margin-top: 14px;"
+                        id="menu_mobile">
+                        <div class="card card-body border-0" style="border-radius: 0;">
+                            <ul id="ul-menu-mobile">
+                                <li class="nav-item"><a href="#">home</a></li>
+                                <li class="nav-item"><a href="#">archives</a></li>
+                                <li class="nav-item"><a href="#">tags</a></li>
+                                <li class="nav-item"><a href="#">categories</a></li>
+                                <li class="nav-item"><a href="#">about</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <a href="/home">
                     <img class="logo_header" src="./assets/img/logo.png" alt="" srcset="">
                 </a>
-                <div class="d-flex">
-                    <span role="button" class="navbar-brand m-0 px-1"><i class="bi bi-md bi-search"></i></span>
-                    <span role="button" class="navbar-brand m-0 px-1">
+                <div class="d-flex gap-2">
+                    <span role="button" data-bs-toggle="modal" data-bs-target="#ModalSearch"
+                        class="navbar-brand m-0 px-1"><i class="bi bi-md bi-search"></i></span>
+                    <span role="button" data-bs-toggle="modal" data-bs-target="#ModalCard"
+                        class="navbar-brand m-0 px-1">
                         <i class="bi bi-bag bi-md position-relative">
                             <span class="position-absolute bg-light d-flex justify-content-center align-items-center"
                                 style="width: 16px; height: 16px; bottom: -1px; left: -3px; border-radius: 100%; font-size: 12px; color: black; font-weight: 400;">
@@ -92,22 +109,24 @@
                     </span>
                 </div>
             </div>
+
         </div>
 
-        <!-- Modal -->
+        <!-- Modal Search -->
         <div class="modal fade" id="ModalSearch" tabindex="-1" role="dialog">
-            <div class="modal-dialog m-0" role="document" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog m-0 modal-dialog-header" role="document" aria-labelledby="exampleModalLabel">
                 <div class="modal-content" style="height: 100vh; border-radius: 0;">
                     <div class="modal-header justify-content-end">
                         <button type="button" class="close btn" data-bs-dismiss="modal" aria-label="Close">
-                            <span class="btn_close" style="font-size: 35px; font-weight: 400;" aria-hidden="true">&times;</span>
+                            <span class="btn_close_modal" style="font-size: 35px; font-weight: 400;"
+                                aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         ...
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
-                        <button type="button" class="btn btn-footer px-10 py-2 w-75">Xem tất cả kết quả
+                        <button type="button" class="btn btn-footer_modal px-10 py-2 w-100">Xem tất cả kết quả
                             <span></span><span></span><span></span><span></span>
                         </button>
                     </div>
@@ -115,7 +134,30 @@
             </div>
         </div>
 
-        
+        <!-- Modal Card -->
+        <div class="modal fade" id="ModalCard" tabindex="-1" role="dialog">
+            <div class="modal-dialog m-0 modal-dialog-header" role="document" style="float:right;"
+                aria-labelledby="exampleModalLabel">
+                <div class="modal-content" style="height: 100vh; border-radius: 0;">
+                    <div class="modal-header justify-content-end">
+                        <button type="button" class="close btn" data-bs-dismiss="modal" aria-label="Close">
+                            <span class="btn_close_modal" style="font-size: 35px; font-weight: 400;"
+                                aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-footer_modal px-10 py-2 w-100">Xem tất cả kết quả
+                            <span></span><span></span><span></span><span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
     </header>
 
@@ -129,7 +171,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
+    <script src="js/header-animation.js"></script>
 </body>
 
 
