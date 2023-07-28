@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', event => {
     setTimeout(function () {
         gifImage.classList.add('animate-fadeIn');
         gifImage.src = "./assets/last_frame.png";
-    }, 6275);
+    }, 6280);
 
 });
 

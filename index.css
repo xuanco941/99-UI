@@ -3,6 +3,7 @@
     --bg-color-header-footer: #1e1e1e;
     --text-color-default: #ffffff;
     --text-color-menu-item: #e7e0e5;
+    --color-highlight: goldenrod;
 }
 
 body {
@@ -38,4 +39,7 @@ li {
 }
 a{
     text-decoration: none;
+}
+.btn:first-child:active{
+    border-color: transparent;
 }

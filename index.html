@@ -14,12 +14,13 @@
     <link rel="stylesheet" href="/index.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/header-modal.css">
 </head>
 
 <body>
     <header id="header">
         <div id="masthead" style="position: absolute; z-index: -999;">
-            <img id="masthead_img" src="" alt="" srcset="">
+            <img id="masthead_img" src="./assets/last_frame.png" alt="" srcset="">
         </div>
         <div id="nav-pc">
             <div class="container-xxl d-flex justify-content-end py-1 gap-3" id="link_header">
@@ -46,7 +47,8 @@
             </div>
             <div class="py-2" id="mainNav">
                 <div class="container-xxl d-flex justify-content-between align-items-center">
-                    <span role="button" class="navbar-brand m-0"><i class="bi bi-xl bi-search"></i></span>
+                    <span role="button" data-bs-toggle="modal" data-bs-target="#ModalSearch" class="navbar-brand m-0"><i
+                            class="bi bi-xl bi-search"></i></span>
                     <ul class="justify-content-center d-flex align-items-center w-100 gap-3 m-0 p-0">
                         <li class="nav-item"><a class="nav-link" href="#about">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#services">Shop</a></li>
@@ -67,19 +69,53 @@
             </div>
         </div>
         <div id="nav-mobile">
-            <div class="fixed-top container-xxl px-0 py-2 d-flex justify-content-between align-items-center">
-                <button class="btn" id="btnShowMenu">
-                    <i class="bi bi-list bi-xl"></i>
-                </button>
+            <div class="fixed-top container-xxl py-2 d-flex justify-content-between align-items-center">
+                <div style="width: 56px;">
+                    <button class="btn px-0 navbar-brand" id="btnShowMenu">
+                        <i class="bi bi-list bi-xl"></i>
+                    </button>
+                </div>
                 <a href="/home">
                     <img class="logo_header" src="./assets/img/logo.png" alt="" srcset="">
                 </a>
-                <div>
-
+                <div class="d-flex">
+                    <span role="button" class="navbar-brand m-0 px-1"><i class="bi bi-md bi-search"></i></span>
+                    <span role="button" class="navbar-brand m-0 px-1">
+                        <i class="bi bi-bag bi-md position-relative">
+                            <span class="position-absolute bg-light d-flex justify-content-center align-items-center"
+                                style="width: 16px; height: 16px; bottom: -1px; left: -3px; border-radius: 100%; font-size: 12px; color: black; font-weight: 400;">
+                                <span>
+                                    1
+                                </span>
+                            </span>
+                        </i>
+                    </span>
                 </div>
             </div>
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="ModalSearch" tabindex="-1" role="dialog">
+            <div class="modal-dialog m-0" role="document" aria-labelledby="exampleModalLabel">
+                <div class="modal-content" style="height: 100vh; border-radius: 0;">
+                    <div class="modal-header justify-content-end">
+                        <button type="button" class="close btn" data-bs-dismiss="modal" aria-label="Close">
+                            <span class="btn_close" style="font-size: 35px; font-weight: 400;" aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-footer px-10 py-2 w-75">Xem tất cả kết quả
+                            <span></span><span></span><span></span><span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
 
     </header>
 
