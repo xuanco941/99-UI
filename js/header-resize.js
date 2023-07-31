@@ -5,7 +5,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let masthead_ = document.querySelector('#masthead');
 
     let nav_pc_ = document.querySelector('#nav-pc');
-    if (masthead_.classList.contains('show')) {
+    if (masthead_.getAttribute('show') == 'true') {
         nav_pc_.style.backgroundColor = 'transparent';
     }
     else {
@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
         let main_ = document.querySelector('#main');
         let nav_pc = document.querySelector('#nav-pc');
 
-        if (masthead.classList.contains('show')) {
+        if (masthead.getAttribute('show') == 'true') {
             main_.style.marginTop = '0px';
         }
         else {
@@ -58,7 +58,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let btnShowMenu = document.querySelector('#btnShowMenu');
     btnShowMenu.addEventListener('click', () => {
         if (btnShowMenu.classList.contains('collapsed') == false) {
-            btnShowMenu.innerHTML = '<i class="bi bi-x bi-xxl"></i>';
+            btnShowMenu.innerHTML = '<i class="bi bi-x bi-xxxl"></i>';
         }
         else {
             btnShowMenu.innerHTML = '<i class="bi bi-list bi-xl"></i>';
@@ -74,7 +74,7 @@ window.addEventListener('DOMContentLoaded', () => {
         let main_ = document.querySelector('#main');
         let nav_pc = document.querySelector('#nav-pc');
 
-        if (masthead.classList.contains('show')) {
+        if (masthead.getAttribute('show') == 'true') {
             masthead.style.display = 'block';
             main_.style.marginTop = '0px';
         }

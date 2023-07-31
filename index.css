@@ -3,7 +3,7 @@
     --bg-color-header-footer: #1e1e1e;
     --text-color-default: #ffffff;
     --text-color-menu-item: #e7e0e5;
-    --color-highlight: goldenrod;
+    --color-highlight: #823f8f;
 }
 
 body {
@@ -18,6 +18,10 @@ body {
 
 #footer {
     background-color: var(--bg-color-header-footer);
+}
+
+.bi-xxxl {
+    font-size: 35px;
 }
 
 .bi-xxl {
