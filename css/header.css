@@ -8,6 +8,7 @@
 #masthead{
     max-height: 100%;
     width: 100%;
+    animation: fadeIn 4s;
 }
 #masthead_video{
     width: 100%;
@@ -20,6 +21,7 @@
 #mainNav.navbar-shrink {
     background-color: var(--bg-color-header-footer);
 }
+
 .logo_header{
     height: 60px;
 }
@@ -106,11 +108,11 @@
     #btnShowMenu{
         color: var(--text-color-default);
     }
-    #nav-mobile > a > img{
-        height: 10px;
+    #nav-mobile > .container-xxl > a > img{
+        height: 35px;
     }
     #masthead{
-        margin-top: 76px;
+        margin-top: 55.5px;
     }
 
     #menu_mobile .card{
