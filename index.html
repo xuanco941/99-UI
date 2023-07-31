@@ -19,7 +19,8 @@
 
 <body>
     <header id="header">
-        <div id="masthead" class="show" style="position: absolute; z-index: -100;">
+        <!--chỉ thêm class show ở home mesthead-->
+        <div id="masthead" show="true" style="position: absolute; z-index: -100;">
             <video autoplay muted id="masthead_video" src="./assets/image/header/masthead.mp4"></video>
             <!-- <img  src="./assets/masthead.gif" alt="" srcset=""> -->
         </div>
@@ -156,7 +157,7 @@
         </div>
     </header>
     <main id="main">
-        <section class="container-xxl" style="font-size: larger; color: white;height: 500px;z-index: 10000;">
+        <section class="container-xxl" style="font-size: larger; background-color: blueviolet; color: white;height: 500px;">
             abc
         </section>
     </main>
@@ -171,7 +172,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
-    <script src="js/header-animation.js"></script>
+    <script src="js/header-resize.js"></script>
 </body>
 
 

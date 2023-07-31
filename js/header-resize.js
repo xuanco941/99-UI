@@ -1,9 +1,24 @@
 // DOMContentLoaded cây Dom sẵn sàng
 
-window.addEventListener('DOMContentLoaded', event => {
+window.addEventListener('DOMContentLoaded', () => {
+
+    let masthead_ = document.querySelector('#masthead');
+
+    let nav_pc_ = document.querySelector('#nav-pc');
+    if (masthead_.classList.contains('show')) {
+        nav_pc_.style.backgroundColor = 'transparent';
+    }
+    else {
+        nav_pc_.style.backgroundColor = 'var(--bg-color-header-footer)';
+    }
+
+
+
+
     //scroll qua 100 y thì gắn fixed và thay css màu, . . .
     var navbarShrink = function () {
         const navbarCollapsible = document.body.querySelector('#mainNav');
+        
         if (!navbarCollapsible) {
             return;
         }
@@ -15,6 +30,23 @@ window.addEventListener('DOMContentLoaded', event => {
             navbarCollapsible.classList.add('navbar-shrink');
             navbarCollapsible.classList.add('fixed-top');
             navbarCollapsible.classList.remove('position-relative');
+        }
+
+
+        let masthead = document.querySelector('#masthead');
+        let main_ = document.querySelector('#main');
+        let nav_pc = document.querySelector('#nav-pc');
+
+        if (masthead.classList.contains('show')) {
+            main_.style.marginTop = '0px';
+        }
+        else {
+            if (window.getComputedStyle(nav_pc).display != 'none') {
+                main_.style.marginTop = nav_pc.clientHeight + 'px';
+            }
+            else {
+                main_.style.marginTop = '0px';
+            }
         }
 
     };
@@ -39,26 +71,31 @@ window.addEventListener('DOMContentLoaded', event => {
         let masthead = document.querySelector('#masthead');
         let header = document.querySelector('#header');
         let nav_mobile = document.querySelector('#nav-mobile');
-        let main = document.querySelector('#main');
+        let main_ = document.querySelector('#main');
         let nav_pc = document.querySelector('#nav-pc');
 
-        mastheadStyle = window.getComputedStyle(masthead).style;
-        if(masthead.classList.contains('show')){
+        if (masthead.classList.contains('show')) {
             masthead.style.display = 'block';
+            main_.style.marginTop = '0px';
         }
-        else{
+        else {
             masthead.style.display = 'none';
-            nav_pc.style.backgroundColor = 'var(--bg-color-header-footer)';
+            if (window.getComputedStyle(nav_pc).display != 'none') {
+                main_.style.marginTop = nav_pc.clientHeight + 'px';
+            }
+            else {
+                main_.style.marginTop = '0px';
+            }
         }
 
 
 
         navMobileDisplay = window.getComputedStyle(nav_mobile).display;
         let headerHeight = masthead.clientHeight;
-        if(navMobileDisplay == 'none'){
+        if (navMobileDisplay == 'none') {
             header.style.height = headerHeight + "px";
         }
-        else{
+        else {
             header.style.height = (headerHeight + 55.5) + "px";
         }
 
@@ -72,10 +109,5 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 })
 
-
-
-window.addEventListener('load', event => {
-
-});
 
 
