@@ -51,7 +51,9 @@ a:hover{
 .btn:first-child:active{
     border-color: transparent;
 }
-
+main{
+    background-color: var(--bg-color-main);
+}
 
 @media (max-width: 992px) { 
 

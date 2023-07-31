@@ -40,13 +40,15 @@ window.addEventListener('DOMContentLoaded', event => {
         let header = document.querySelector('#header');
         let nav_mobile = document.querySelector('#nav-mobile');
         let main = document.querySelector('#main');
+        let nav_pc = document.querySelector('#nav-pc');
 
         mastheadStyle = window.getComputedStyle(masthead).style;
-        if(masthead.classList.contains('.show')){
+        if(masthead.classList.contains('show')){
             masthead.style.display = 'block';
         }
         else{
             masthead.style.display = 'none';
+            nav_pc.style.backgroundColor = 'var(--bg-color-header-footer)';
         }
 
 
