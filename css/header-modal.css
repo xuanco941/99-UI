@@ -5,8 +5,9 @@
 .btn_close_modal{
     color: var(--text-color-menu-item);
 }
+
 .btn_close_modal:hover{
-    color: var(--text-color-default);
+    color: var(--color-highlight);
 }
 
 .btn-footer_modal {

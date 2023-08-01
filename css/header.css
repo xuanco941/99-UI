@@ -4,7 +4,7 @@
 }
 
 #masthead {
-    max-height: 85%;
+    max-height: 85vh;
     width: 100%;
     transition: background-color 0.2s ease;
     animation: fadeIn 3s;
@@ -12,7 +12,9 @@
 
 #masthead_video {
     width: 100%;
+    max-height: 100%;
 }
+
 
 #mainNav {
     /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); */
@@ -25,7 +27,7 @@
 }
 
 
-.item-link-info:hover{
+.item-link-info:hover {
     color: var(--color-highlight);
 }
 
@@ -64,7 +66,7 @@
 }
 
 .nav-item:hover {
-    color: #fff;
+    color: var(--color-highlight);
 }
 
 .nav-item::before {
@@ -86,10 +88,9 @@
     padding-right: 0;
 }
 
-#mainNav.navbar-shrink .navbar-brand {
-    color: var(--text-color-menu-item);
+#nav-pc {
+    background-color: transparent;
 }
-
 #nav-pc:hover {
     background-color: var(--bg-color-header-footer);
 }
@@ -132,6 +133,7 @@
     #btnShowMenu {
         color: var(--text-color-default);
     }
+
     #btnShowMenu:hover {
         color: var(--color-highlight);
     }

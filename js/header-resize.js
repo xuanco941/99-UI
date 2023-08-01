@@ -5,13 +5,9 @@ window.addEventListener('DOMContentLoaded', () => {
     let masthead_ = document.querySelector('#masthead');
 
     let nav_pc_ = document.querySelector('#nav-pc');
-    if (masthead_.getAttribute('show') == 'true') {
-        nav_pc_.style.backgroundColor = 'transparent';
-    }
-    else {
+    if (masthead_.getAttribute('show') != 'true') {
         nav_pc_.style.backgroundColor = 'var(--bg-color-header-footer)';
     }
-
 
 
 

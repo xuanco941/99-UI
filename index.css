@@ -3,7 +3,7 @@
     --bg-color-header-footer: #1e1e1e;
     --text-color-default: #ffffff;
     --text-color-menu-item: #e7e0e5;
-    --color-highlight: #823f8f;
+    --color-highlight: #ffd21e;
 }
 
 body {
@@ -50,7 +50,7 @@ a{
     color: var(--text-color-menu-item);
 }
 a:hover{
-    color: var(--text-color-default);
+    color: var(--color-highlight);
 }
 .btn:first-child:active{
     border-color: transparent;
