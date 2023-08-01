@@ -80,6 +80,7 @@
     transition: width 0.5s;
 }
 
+
 .nav-item:hover::before {
     width: 100%;
 }
@@ -117,6 +118,7 @@
         opacity: 1;
     }
 }
+
 
 
 @media (max-width: 992px) {

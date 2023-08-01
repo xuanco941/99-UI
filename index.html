@@ -22,12 +22,42 @@
         <!--chỉ thêm show=true ở home mesthead-->
         <div id="masthead" show="true" style="position: absolute; z-index: -100;">
             <video autoplay muted id="masthead_video" src="./assets/image/header/masthead.mp4"></video>
-            <div class="container-xxl position-absolute text-light bottom-0 d-flex justify-content-center w-100">
-                <div class="row">
-                    <div class="col col-4">
+            <div class="position-absolute bottom-0 text-white w-100 d-flex justify-content-center">
+                <div class="container-xxl">
+                    <div class="row g-4 py-5 row-cols-2">
+                        <div class="feature col">
+                            <div
+                                class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                                <svg class="bi" width="1em" height="1em">
+                                    <use xlink:href="#collection" />
+                                </svg>
+                            </div>
+                            <h3 class="fs-2 text-body-emphasis">Featured title</h3>
+                            <p>abc</p>
+                            <a href="#" class="icon-link">
+                                Call to action
+                                <i class="bi bi-caret-right"></i>
+                            </a>
+                        </div>
+                        <div class="feature col">
+                            <div
+                                class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                                <svg class="bi" width="1em" height="1em">
+                                    <use xlink:href="#people-circle" />
+                                </svg>
+                            </div>
+                            <h3 class="fs-2 text-body-emphasis">Featured title</h3>
+                            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with
+                                another sentence and
+                                probably just keep going until we run out of words.</p>
+                            <a href="#" class="icon-link">
+                                Call to action
+                                <svg class="bi">
+                                    <use xlink:href="#chevron-right" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
-                    <div class="col col-4"></div>
-                    <div class="col col-4"></div>
                 </div>
             </div>
             <!-- <img  src="./assets/masthead.gif" alt="" srcset=""> -->
@@ -40,7 +70,8 @@
                 <a class="item-link-info" href="https://www.instagram.com/vibes.js" target="_blank">
                     <i class="bi bi-instagram bi-sm"></i>
                 </a>
-                <a class="item-link-info" href="https://www.youtube.com/channel/UCcOPOtPYlhndNYEyFm3cV7A" target="_blank">
+                <a class="item-link-info" href="https://www.youtube.com/channel/UCcOPOtPYlhndNYEyFm3cV7A"
+                    target="_blank">
                     <i class="bi bi-youtube bi-sm"></i>
                 </a>
                 <a class="item-link-info" href="https://github.com/xuanco941" target="_blank">
@@ -63,7 +94,7 @@
                         <li class="nav-item"><a class="nav-link" href="#about">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#services">Shop</a></li>
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">FAQs</a></li>
                     </ul>
                     <span role="button" data-bs-toggle="modal" data-bs-target="#ModalCard" class="navbar-brand m-0">
                         <i class="bi bi-bag bi-xl position-relative">
@@ -166,19 +197,38 @@
     </header>
 
 
+
+
+
+
     <main id="main">
         <section class="container-xxl">
-            
+
         </section>
     </main>
 
 
+
+
+
     <!-- Footer-->
-    <footer class="py-5 px-4" style="margin-top: 500px;" id="footer">
-        <div class="container-xxl">
-            <div class="small text-center">Copyright &copy; 2023 - Xuan</div>
+    <footer class="pt-5 pb-3 px-4" style="margin-top: 500px;" id="footer">
+        <div class="container-xxl pt-2 mt-2">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="#" class="px-2">Home</a></li>
+                <li class="nav-item"><a href="#" class="px-2">Shop</a></li>
+                <li class="nav-item"><a href="#" class="px-2">Contact</a></li>
+                <li class="nav-item"><a href="#" class="px-2">FAQs</a></li>
+            </ul>
+            <div class="d-flex flex-column">
+                <a href="./home" class="text-center mb-3"><img class="logo_header" src="./assets/image/logo.png" alt=""
+                        srcset=""></a>
+                <div class="small text-center">Copyright &copy; 2023 - Xuan9</div>
+            </div>
         </div>
     </footer>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
