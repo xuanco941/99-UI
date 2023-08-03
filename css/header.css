@@ -53,7 +53,6 @@
 
 .navbar-brand:hover i span {
     background-color: var(--color-highlight);
-    color: var(--text-color-default)
 }
 
 .nav-item {
@@ -108,6 +107,15 @@
     background-color: var(--bg-color-header-footer);
 }
 
+
+.feature-masthead{
+    color: var(--color-highlight);
+}
+.feature-masthead h1{
+    color: var(--color-highlight);
+}
+
+
 /*hiện dần*/
 @keyframes fadeIn {
     from {
@@ -118,6 +126,134 @@
         opacity: 1;
     }
 }
+
+
+/*button center masthead*/
+.btn-conteiner {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-content {
+    display: flex;
+    align-items: center;
+    padding: 5px 30px;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    color: #333333;
+    background: var(--color-highlight);
+    transition: 1s;
+    border-radius: 100px;
+}
+
+.btn-content:hover,
+.btn-content:focus {
+    transition: 0.5s;
+    -webkit-animation: btn-content 1s;
+    animation: btn-content 1s;
+    outline: 0.1em solid transparent;
+    outline-offset: 0.2em;
+    box-shadow: 0 0 0.4em 0 var(--color-highlight);
+    color: black;
+}
+
+.btn-content .icon-arrow {
+    transition: 0.5s;
+    margin-right: 0px;
+    transform: scale(0.6);
+}
+
+.btn-content:hover .icon-arrow {
+    transition: 0.5s;
+    margin-right: 25px;
+}
+
+.icon-arrow {
+    width: 20px;
+    margin-left: 15px;
+    position: relative;
+    height: 100%;
+    fill: red;
+}
+
+/* SVG */
+#arrow-icon-three{
+    fill: #333333;
+}
+#arrow-icon-one {
+    transition: 0.4s;
+    transform: translateX(-60%);
+    fill: #333333;
+}
+
+#arrow-icon-two {
+    transition: 0.5s;
+    fill: #333333;
+    transform: translateX(-30%);
+}
+
+.btn-content:hover #arrow-icon-three {
+    animation: color_anim 1s infinite 0.2s;
+}
+
+.btn-content:hover #arrow-icon-one {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.6s;
+}
+
+.btn-content:hover #arrow-icon-two {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.4s;
+}
+
+/* SVG animations */
+@keyframes color_anim {
+    0% {
+        fill: var(--color-highlight);
+    }
+
+    50% {
+        fill: var(--bg-color-header-footer);
+    }
+
+    100% {
+        fill: var(--color-highlight);
+    }
+}
+
+/* Button animations */
+@-webkit-keyframes btn-content {
+    0% {
+        outline: 0.2em solid var(--color-highlight);
+        outline-offset: 0;
+    }
+}
+
+@keyframes btn-content {
+    0% {
+        outline: 0.2em solid var(--color-highlight);
+        outline-offset: 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -166,6 +302,17 @@
     #ul-menu-mobile li {
         margin-top: 7px;
         margin-bottom: 7px;
+    }
+
+
+
+    .btn-content{
+        padding: 3px 15px;
+        font-size: 17px;
+        margin-bottom: 20px;
+    }
+    .feature-masthead h1{
+        font-size: 25px;
     }
 
 
