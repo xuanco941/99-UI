@@ -5,7 +5,10 @@
     border-radius: 100%;
 }
 
-#model-shop h2 {
+#list-model h2 {
+    color: var(--color-highlight);
+}
+#list-product h2 {
     color: var(--color-highlight);
 }
 
@@ -71,3 +74,5 @@
 }
 
 
+
+/*list product*/

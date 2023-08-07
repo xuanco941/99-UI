@@ -11,6 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+
     <link rel="stylesheet" href="/index.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/footer.css">
@@ -27,7 +29,7 @@
             <!-- <img  src="./assets/masthead.gif" alt="" srcset=""> -->
         </div>
         <div class="position-absolute w-100 bottom-0 py-1 py-md-4 px-1 px-md-5 feature-masthead">
-            <div class="container d-flex justify-content-center">
+            <div class="container mb-xxl-5 d-flex justify-content-center">
                 <div class="row gx-4 gx-lg-5 align-items-center justify-content-center text-center">
                     <div class="col-lg-8 align-self-end">
                         <h1 class="font-weight-bold">Thiết Kế Quần Áo Theo Yêu Cầu</h1>
@@ -101,9 +103,9 @@
                         <li class="nav-item"><a class="nav-link" href="#contact">FAQs</a></li>
                     </ul>
                     <span role="button" data-bs-toggle="modal" data-bs-target="#ModalCard" class="navbar-brand m-0">
-                        <i class="bi bi-bag bi-xl position-relative">
+                        <i class="bi bi-cart bi-xl position-relative">
                             <span class="position-absolute d-flex justify-content-center align-items-center"
-                                style="width: 16px; height: 16px; bottom: -1px; left: -3px; border-radius: 100%; font-size: 10px; color: black; font-weight: 400;">
+                                style="width: 15px; height: 15px; top: 0px; right: -4px; border-radius: 100%; font-size: 10px; color: black; font-weight: 400;">
                                 <span>
                                     1
                                 </span>
@@ -142,9 +144,9 @@
                         class="navbar-brand m-0 px-1"><i class="bi bi-md bi-search"></i></span>
                     <span role="button" data-bs-toggle="modal" data-bs-target="#ModalCard"
                         class="navbar-brand m-0 px-1">
-                        <i class="bi bi-bag bi-md position-relative">
+                        <i class="bi bi-cart bi-md position-relative">
                             <span class="position-absolute d-flex justify-content-center align-items-center"
-                                style="width: 16px; height: 16px; bottom: -1px; left: -3px; border-radius: 100%; font-size: 10px; color: black; font-weight: 400;">
+                                style="width: 15px; height: 15px; top: 0px; right: -4px; border-radius: 100%; font-size: 10px; color: black; font-weight: 400;">
                                 <span>
                                     1
                                 </span>
@@ -211,7 +213,7 @@
                 <div class="feature col text-lg-center text-left">
                     <div
                         class="feature-icon d-inline-flex align-items-center justify-content-center bg-gradient fs-3 mb-3">
-                        <i class="bi bi-bag-plus"></i>
+                        <i class="bi bi-cart-plus"></i>
                     </div>
                     <h3 class="fs-5 text-white">Giảm giá lên đến 50%</h3>
                     <p class="text-white-50">Nhận chiết khấu cao hơn khi bạn có 5 sản phẩm trở lên trong một đơn hàng.
@@ -249,14 +251,14 @@
             </div>
         </section>
 
-        <section class="container-xxl px-4 py-2 py-lg-4" id="model-shop">
+        <section class="container-xxl px-4 py-2 py-lg-4" id="list-model">
             <h2 class="text-center fs-2">Danh Mục Mẫu</h2>
-            <div class="row g-4 py-5 row-cols-1 row-cols-md-2 row-cols-xl-3 row-card-category">
+            <div class="row g-4 py-5 row-cols-2 row-cols-xl-3 row-card-category">
                 <div class="col">
                     <a class="text-center" href="">
                         <div class="card-category">
-                            <img class="position-absolute z-index-1"
-                                src="./assets/image/component/designer.png" alt="" srcset="">
+                            <img class="position-absolute z-index-1" src="./assets/image/component/designer.png" alt=""
+                                srcset="">
                         </div>
                         <h3 class="mt-3 fs-3 h3-card text-center">T-Shirt</h3>
                     </a>
@@ -264,8 +266,8 @@
                 <div class="col">
                     <a class="text-center" href="">
                         <div class="card-category">
-                            <img class="position-absolute z-index-1"
-                                src="./assets/image/component/designer.png" alt="" srcset="">
+                            <img class="position-absolute z-index-1" src="./assets/image/component/designer.png" alt=""
+                                srcset="">
                         </div>
                         <h3 class="mt-3 fs-3 h3-card text-center">T-Shirt</h3>
                     </a>
@@ -273,8 +275,8 @@
                 <div class="col">
                     <a class="text-center" href="">
                         <div class="card-category">
-                            <img class="position-absolute z-index-1"
-                                src="./assets/image/component/designer.png" alt="" srcset="">
+                            <img class="position-absolute z-index-1" src="./assets/image/component/designer.png" alt=""
+                                srcset="">
                         </div>
                         <h3 class="mt-3 fs-3 h3-card text-center">Hoodies</h3>
                     </a>
@@ -282,13 +284,33 @@
                 <div class="col">
                     <a class="text-center" href="">
                         <div class="card-category">
-                            <img class="position-absolute z-index-1"
-                                src="./assets/image/component/designer.png" alt="" srcset="">
+                            <img class="position-absolute z-index-1" src="./assets/image/component/designer.png" alt=""
+                                srcset="">
                         </div>
                         <h3 class="mt-3 fs-3 h3-card text-center">T-Shirt</h3>
                     </a>
                 </div>
             </div>
+        </section>
+
+        <section class="container-xxl px-4 py-2 py-lg-4" id="list-product">
+            <h2 class="text-center fs-2">Thiết Kế Có Sẵn</h2>
+            <div class="product-box">
+                <div class="row g-4 py-5 row-cols-3 row-cols-lg-5 row-card-category">
+                    <div class="col">
+                        <div class="box-scene" style="width: 100%; height: 300px;">
+                            <a-scene embedded style="max-width: 100%; max-height: 100%;" background="color: #fff"
+                                cursor="rayOrigin:mouse" raycaster="objects: [data-raycastable]">
+                                <a-assets>
+                                    <a-asset-item id="tShirt" src="./assets/model-glb/shirt_baked.glb"></a-asset-item>
+                                </a-assets>
+                                <a-gltf-model data-raycastable gltf-model="#tShirt" position="1 1 1"></a-gltf-model>
+                            </a-scene>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </section>
     </main>
 
@@ -318,6 +340,7 @@
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
     <script src="js/header-resize.js"></script>
+    <script src="./assets/js/aframe/home-static.js"></script>
 </body>
 
 
