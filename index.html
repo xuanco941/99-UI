@@ -303,9 +303,15 @@
                 <div class="row g-4 py-5 row-cols-1 row-cols-md-3 row-card-category">
                     <div class="col">
                         <div class="box-scene" style="width: 100%; height: 300px;">
-                            <a-scene embedded renderer="colorManagement: true;" model-viewer="gltfModel: #tshirt; title: T-Shirt" vr-mode-ui="enabled: true">
-                                <a-assets timeout="2000">
-                                    <a-asset-item id="tshirt" src="./assets/model-glb/shirt_baked.glb" response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
+                            <a-scene embedded renderer="colorManagement: true;"
+                                model-viewer="gltfModel: #triceratops; title: Triceratops"
+                                vr-mode-ui="enabled: true">
+                                <a-assets timeout="1000">
+                                    <a-asset-item id="triceratops"
+                                        src="./assets/model-glb/shirt_baked.glb"
+                                        response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
+
+                                    <img id="shadow" src="./assets/image/backgound/shadow2.png"></img>
                                 </a-assets>
                             </a-scene>
                         </div>

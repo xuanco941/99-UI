@@ -1,4 +1,3 @@
-//background-gradient
 /* global AFRAME */
 AFRAME.registerShader('background-gradient', {
   schema: {
@@ -41,20 +40,18 @@ AFRAME.registerShader('background-gradient', {
 
 
 
-
 /* global AFRAME, THREE */
 AFRAME.registerComponent('model-viewer', {
   schema: {
-    gltfModel: {default: ''},
-    title: {default: ''}
-    },
+    gltfModel: { default: '' }
+  },
   init: function () {
     var el = this.el;
 
-    el.setAttribute('renderer', {colorManagement: true});
-    el.setAttribute('raycaster', {objects: '.raycastable'});
-    el.setAttribute('cursor', {rayOrigin: 'mouse', fuse: false});
-    el.setAttribute('webxr', {optionalFeatures: 'hit-test, local-floor, light-estimation, anchors'});
+    el.setAttribute('renderer', { colorManagement: true });
+    el.setAttribute('raycaster', { objects: '.raycastable' });
+    el.setAttribute('cursor', { rayOrigin: 'mouse', fuse: false });
+    el.setAttribute('webxr', { optionalFeatures: 'hit-test, local-floor, light-estimation, anchors' });
     el.setAttribute('background', '');
 
     this.onModelLoaded = this.onModelLoaded.bind(this);
@@ -66,8 +63,6 @@ AFRAME.registerComponent('model-viewer', {
 
     this.onTouchMove = this.onTouchMove.bind(this);
     this.onTouchEnd = this.onTouchEnd.bind(this);
-
-    this.submitURLButtonClicked = this.submitURLButtonClicked.bind(this);
 
     this.onThumbstickMoved = this.onThumbstickMoved.bind(this);
 
@@ -111,16 +106,11 @@ AFRAME.registerComponent('model-viewer', {
     this.modelEl.addEventListener('model-loaded', this.onModelLoaded);
   },
 
+
   update: function () {
     if (!this.data.gltfModel) { return; }
     this.el.setAttribute('ar-hit-test', { target: '#modelEl', type: 'map' });
     this.modelEl.setAttribute('gltf-model', this.data.gltfModel);
-  },
-
-  submitURLButtonClicked: function (evt) {
-    var modelURL = this.inputEl.value;
-    if (modelURL === this.inputDefaultValue) { return; }
-    this.el.setAttribute('model-viewer', 'gltfModel', modelURL);
   },
 
   initCameraRig: function () {
@@ -129,7 +119,7 @@ AFRAME.registerComponent('model-viewer', {
     var rightHandEl = this.rightHandEl = document.createElement('a-entity');
     var leftHandEl = this.leftHandEl = document.createElement('a-entity');
 
-    cameraEl.setAttribute('camera', {fov: 60});
+    cameraEl.setAttribute('camera', { fov: 60 });
     cameraEl.setAttribute('look-controls', {
       magicWindowTrackingEnabled: false,
       mouseEnabled: false,
@@ -137,14 +127,14 @@ AFRAME.registerComponent('model-viewer', {
     });
 
     rightHandEl.setAttribute('rotation', '0 90 0');
-    rightHandEl.setAttribute('laser-controls', {hand: 'right'});
-    rightHandEl.setAttribute('raycaster', {objects: '.raycastable'});
-    rightHandEl.setAttribute('line', {color: '#118A7E'});
+    rightHandEl.setAttribute('laser-controls', { hand: 'right' });
+    rightHandEl.setAttribute('raycaster', { objects: '.raycastable' });
+    rightHandEl.setAttribute('line', { color: '#118A7E' });
 
     leftHandEl.setAttribute('rotation', '0 90 0');
-    leftHandEl.setAttribute('laser-controls', {hand: 'left'});
-    leftHandEl.setAttribute('raycaster', {objects: '.raycastable'});
-    leftHandEl.setAttribute('line', {color: '#118A7E'});
+    leftHandEl.setAttribute('laser-controls', { hand: 'left' });
+    leftHandEl.setAttribute('raycaster', { objects: '.raycastable' });
+    leftHandEl.setAttribute('line', { color: '#118A7E' });
 
     cameraRigEl.appendChild(cameraEl);
     cameraRigEl.appendChild(rightHandEl);
@@ -155,7 +145,7 @@ AFRAME.registerComponent('model-viewer', {
 
   initBackground: function () {
     var backgroundEl = this.backgroundEl = document.querySelector('a-entity');
-    backgroundEl.setAttribute('geometry', {primitive: 'sphere', radius: 65});
+    backgroundEl.setAttribute('geometry', { primitive: 'sphere', radius: 65 });
     backgroundEl.setAttribute('material', {
       shader: 'background-gradient',
       colorTop: '#37383c',
@@ -175,12 +165,8 @@ AFRAME.registerComponent('model-viewer', {
     var modelPivotEl = this.modelPivotEl = document.createElement('a-entity');
     // This is our glTF model entity.
     var modelEl = this.modelEl = document.createElement('a-entity');
-    // Shadow blurb for 2D and VR modes. Scaled to match the size of the model.
-    var shadowEl = this.shadowEl = document.createElement('a-entity');
     // Real time shadow only used in AR mode.
     var arShadowEl = this.arShadowEl = document.createElement('a-entity');
-    // The title / legend displayed above the model.
-    var titleEl = this.titleEl = document.createElement('a-entity');
     // Scene ligthing.
     var lightEl = this.lightEl = document.createElement('a-entity');
     var sceneLightEl = this.sceneLightEl = document.createElement('a-entity');
@@ -211,13 +197,6 @@ AFRAME.registerComponent('model-viewer', {
 
     modelPivotEl.appendChild(modelEl);
 
-    shadowEl.setAttribute('rotation', '-90 -30 0');
-    shadowEl.setAttribute('geometry', 'primitive: plane; width: 1.0; height: 1.0');
-    shadowEl.setAttribute('material', 'src: #shadow; transparent: true; opacity: 0.40');
-    shadowEl.setAttribute('hide-on-enter-ar', '');
-
-    modelPivotEl.appendChild(shadowEl);
-
     arShadowEl.setAttribute('rotation', '-90 0 0');
     arShadowEl.setAttribute('geometry', 'primitive: plane; width: 30.0; height: 30.0');
     arShadowEl.setAttribute('shadow', 'receive: true');
@@ -233,13 +212,6 @@ AFRAME.registerComponent('model-viewer', {
     });
 
     modelPivotEl.appendChild(arShadowEl);
-
-    titleEl.id = 'title';
-    titleEl.setAttribute('text', 'value: ' + this.data.title + '; width: 6');
-    titleEl.setAttribute('hide-on-enter-ar', '');
-    titleEl.setAttribute('visible', 'false');
-
-    this.containerEl.appendChild(titleEl);
 
     lightEl.id = 'light';
     lightEl.setAttribute('position', '-2 4 2');
@@ -315,7 +287,6 @@ AFRAME.registerComponent('model-viewer', {
     } else {
       document.removeEventListener('wheel', this.onMouseWheel);
     }
-
 
     var modelPivotEl = this.modelPivotEl;
     var intersection;
@@ -467,8 +438,6 @@ AFRAME.registerComponent('model-viewer', {
     var center;
     var scale;
     var modelEl = this.modelEl;
-    var shadowEl = this.shadowEl;
-    var titleEl = this.titleEl;
     var gltfObject = modelEl.getObject3D('mesh');
 
     // Reset position and scales.
@@ -494,17 +463,6 @@ AFRAME.registerComponent('model-viewer', {
     center = box.getCenter(new THREE.Vector3());
     size = box.getSize(new THREE.Vector3());
 
-    shadowEl.object3D.scale.y = size.x;
-    shadowEl.object3D.scale.x = size.y;
-    shadowEl.object3D.position.y = -size.y / 2;
-    shadowEl.object3D.position.z = -center.z;
-    shadowEl.object3D.position.x = -center.x;
-
-    titleEl.object3D.position.x = 2.2 - center.x;
-    titleEl.object3D.position.y = size.y + 0.5;
-    titleEl.object3D.position.z = -2;
-    titleEl.object3D.visible = true;
-
     modelEl.object3D.position.x = -center.x;
     modelEl.object3D.position.y = -center.y;
     modelEl.object3D.position.z = -center.z;
@@ -519,3 +477,4 @@ AFRAME.registerComponent('model-viewer', {
     this.oldClientY = evt.clientY;
   }
 });
+
