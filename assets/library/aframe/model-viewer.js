@@ -146,7 +146,7 @@ AFRAME.registerComponent('model-viewer', {
   },
 
   initBackground: function () {
-    var backgroundEl = this.backgroundEl = document.querySelector('a-entity');
+    var backgroundEl = this.backgroundEl = this.el.querySelector('a-entity');
     backgroundEl.setAttribute('geometry', { primitive: 'sphere', radius: 65 });
     backgroundEl.setAttribute('material', {
       shader: 'background-gradient',
@@ -285,9 +285,9 @@ AFRAME.registerComponent('model-viewer', {
 
     // Kiểm tra trạng thái VR
     if (this.el.sceneEl.is('vr-mode')) {
-      document.addEventListener('wheel', this.onMouseWheel);
+      this.el.addEventListener('wheel', this.onMouseWheel);
     } else {
-      document.removeEventListener('wheel', this.onMouseWheel);
+      this.el.removeEventListener('wheel', this.onMouseWheel);
     }
 
     var modelPivotEl = this.modelPivotEl;
@@ -465,7 +465,7 @@ AFRAME.registerComponent('model-viewer', {
     center = box.getCenter(new THREE.Vector3());
     size = box.getSize(new THREE.Vector3());
 
-    modelEl.object3D.position.x = -center.x;
+    modelEl.object3D.position.x = -center.x;  
     modelEl.object3D.position.y = -center.y;
     modelEl.object3D.position.z = -center.z;
 
