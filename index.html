@@ -13,14 +13,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
 
-    <link rel="stylesheet" href="/index.css">
-    <link rel="stylesheet" href="./css/header.css">
-    <link rel="stylesheet" href="./css/footer.css">
-    <link rel="stylesheet" href="./css/header-modal.css">
-    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/header.css">
+    <link rel="stylesheet" href="./assets/css/footer.css">
+    <link rel="stylesheet" href="./assets/css/header-modal.css">
+    <link rel="stylesheet" href="./assets/css/home.css">
 
-    <script src="/background-gradient.js"></script>
-    <script src="model-viewer.js"></script>
+    <!-- view product -->
+    <script src="./assets/library/aframe/model-viewer.js"></script>
 </head>
 
 <body>
@@ -296,6 +296,7 @@
             </div>
         </section>
 
+
         <section class="container-xxl px-4 py-2 py-lg-4" id="list-product">
             <h2 class="text-center fs-2">Thiết Kế Có Sẵn</h2>
             <div class="product-box">
@@ -305,7 +306,6 @@
                             <a-scene embedded renderer="colorManagement: true;" model-viewer="gltfModel: #tshirt; title: T-Shirt" vr-mode-ui="enabled: true">
                                 <a-assets timeout="2000">
                                     <a-asset-item id="tshirt" src="./assets/model-glb/shirt_baked.glb" response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
-                                    <img id="shadow" src="shadow2.png"></img>
                                 </a-assets>
                             </a-scene>
                         </div>
@@ -341,7 +341,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
-    <script src="js/header-resize.js"></script>
+    <script src="./assets/js/animation/header-resize.js"></script>
     <!-- <script src="./assets/js/aframe/default-entity.js"></script> -->
 </body>
 
