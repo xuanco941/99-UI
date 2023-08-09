@@ -303,52 +303,27 @@
                 <div class="row g-4 py-5 row-cols-1 row-cols-md-3 row-card-category">
                     <div class="col">
                         <div class="box-scene" style="width: 100%; height: 300px;">
-                            <!-- <a-scene embedded renderer="colorManagement: true;"
-                                model-viewer="gltfModel: #triceratops; title: Triceratops"
+                            <a-scene embedded renderer="colorManagement: true;"
+                                model-viewer="gltfModel: #triceratops1; id:1"
                                 vr-mode-ui="enabled: true">
                                 <a-assets timeout="1000">
-                                    <a-asset-item id="triceratops"
-                                        src="./assets/model-glb/shirt_baked.glb"
+                                    <a-asset-item id="triceratops1"
+                                        src="./assets/model-glb/shirt_baked1.glb"
                                         response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
                                 </a-assets>
-                            </a-scene> -->
+                            </a-scene>
                         </div>
                     </div>
                     <div class="col">
                         <div class="box-scene" style="width: 100%; height: 300px;">
                             <a-scene embedded renderer="colorManagement: true;"
-                                model-viewer="gltfModel: #triceratops2; title: Triceratops"
+                                model-viewer="gltfModel: #triceratops2; id:2"
                                 vr-mode-ui="enabled: true">
                                 <a-assets timeout="1000">
                                     <a-asset-item id="triceratops2"
-                                        src="./assets/model-glb/shirt_baked.glb"
+                                        src="./assets/model-glb/shirt_baked2.glb"
                                         response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
                                 </a-assets>
-
-                                <a-entity id="cameraRig">
-                                    <a-entity id="camera" camera="fov: 60;" look-controls="magicWindowTrackingEnabled: false; mouseEnabled: false; touchEnabled: false;"></a-entity>
-                                    <a-entity id="rightHand" rotation="0 90 0" laser-controls="hand: right;" raycaster="objects: .raycastable;">
-                                        <a-entity line="color: #118A7E;"></a-entity>
-                                    </a-entity>
-                                    <a-entity id="leftHand" rotation="0 90 0" laser-controls="hand: left;" raycaster="objects: .raycastable;">
-                                        <a-entity line="color: #118A7E;"></a-entity>
-                                    </a-entity>
-                                </a-entity>
-                                
-                                <a-entity id="background" geometry="primitive: sphere; radius: 65;" material="shader: background-gradient; colorTop: #37383c; colorBottom: #757575; side: back;" hide-on-enter-ar=""></a-entity>
-                                <a-entity id="sceneLight" light="type: hemisphere; intensity: 1;"></a-entity>
-
-                                <a-entity id="container">
-                                    <a-entity id="laserHitPanel" position="0 0 -10" geometry="primitive: plane; width: 30; height: 20" material="color: red" visible="false" class="raycastable"></a-entity>
-                                    <a-entity id="modelPivot">
-                                        <a-entity id="modelEl" rotation="0 -30 0" animation-mixer="" shadow="cast: true; receive: false">
-                                            <!-- Your glTF model here -->
-                                        </a-entity>
-                                        <a-entity id="arShadow" rotation="-90 0 0" geometry="primitive: plane; width: 30.0; height: 30.0" shadow="receive: true" ar-shadows="opacity: 0.2" visible="false"></a-entity>
-                                    </a-entity>
-                                    <a-entity id="light" position="-2 4 2" light="type: directional; castShadow: true; shadowMapHeight: 1024; shadowMapWidth: 1024; shadowCameraLeft: -7; shadowCameraRight: 5; shadowCameraBottom: -5; shadowCameraTop: 5; intensity: 0.5; target: #modelPivot;"></a-entity>
-                                </a-entity>
-                            
                             </a-scene>
                         </div>
                     </div>
