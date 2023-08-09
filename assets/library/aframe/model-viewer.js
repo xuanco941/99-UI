@@ -74,9 +74,30 @@ AFRAME.registerComponent('model-viewer', {
 
     this.onOrientationChange = this.onOrientationChange.bind(this);
 
-    this.initCameraRig();
-    this.initEntities();
-    this.initBackground();
+    // this.initCameraRig();
+    // this.initEntities();
+    // this.initBackground();
+
+    this.cameraRigEl = document.getElementById('cameraRig');
+    this.cameraEl = document.getElementById('camera');
+    this.rightHandEl = document.getElementById('rightHand');
+    this.leftHandEl = document.getElementById('leftHand');
+
+    this.backgroundEl = document.querySelector('a-entity')
+
+    this.containerEl = document.getElementById('container');
+    // Plane used as a hit target for laser controls when in VR mode
+    this.laserHitPanelEl = document.getElementById('laserHitPanel');
+    // Models are often not centered on the 0,0,0.
+    // We will center the model and rotate a pivot.
+    this.modelPivotEl = document.getElementById('modelPivot');
+    // This is our glTF model entity.
+    this.modelEl = document.getElementById('modelEl');
+    // Real time shadow only used in AR mode.
+    this.arShadowEl = document.getElementById('arShadow');
+    // Scene ligthing.
+    this.lightEl = document.getElementById('light');
+    this.sceneLightEl = document.getElementById('sceneLight');
 
     // Disable context menu on canvas when pressing mouse right button;
     this.el.sceneEl.canvas.oncontextmenu = function (evt) { evt.preventDefault(); };
