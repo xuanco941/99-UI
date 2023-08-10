@@ -469,6 +469,8 @@ AFRAME.registerComponent('model-viewer', {
     modelEl.object3D.position.y = -center.y;
     modelEl.object3D.position.z = -center.z;
 
+    console.log(modelEl.object3D);
+
     // When in mobile landscape we want to bring the model a bit closer.
     if (AFRAME.utils.device.isLandscape()) { this.cameraRigEl.object3D.position.z -= 1; }
   },

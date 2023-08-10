@@ -59,6 +59,14 @@ main{
     background-color: var(--bg-color-main);
 }
 
+/* button show vr của aframe */
+.a-enter-vr-button{
+    z-index: 5;
+}
+.a-enter-vr-button:hover{
+    background-color: var(--color-highlight);
+}
+
 @media (max-width: 992px) { 
 
 }
