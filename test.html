@@ -6,37 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="./assets/js/aframe/shader-bg-gradient.js"></script>
+    <script src="./test.js"></script>
+    <!-- <script src="./assets/library/aframe/gradient-sky.js"></script> -->
 
 </head>
 
 <body>
 
-    <script>
-        // Component to change to a sequential color on click.
-        AFRAME.registerComponent('cursor-listener', {
-            init: function () {
-                var lastIndex = -1;
-                var COLORS = ['red', 'green', 'blue'];
-                this.el.addEventListener('click', function (evt) {
-                    lastIndex = (lastIndex + 1) % COLORS.length;
-                    this.setAttribute('material', 'color', COLORS[lastIndex]);
-                    console.log('I was clicked at: ', evt.detail.intersection.point);
-                });
-            }
-        });
-    </script>
+    <section class="container-xxl px-4 py-2 py-lg-4" id="list-product">
+        <div class="product-box">
+            <div class="row g-4 py-5 row-cols-1 row-cols-md-3 row-card-category">
+                <div class="col">
+                    <div class="box-scene" style="width: 100%; height: 300px;">
+                        <a-scene embedded renderer="colorManagement: true" vr-mode-ui="enabled: true"
+                            cursor="rayOrigin: mouse; fuse: false" raycaster="objects: .raycastable"
+                            webxr="optionalFeatures: hit-test, local-floor, light-estimation, anchors" model-viewer>
 
-<a-scene>
-    <a-entity camera look-controls>
-        <a-entity cursor="fuse: true; fuseTimeout: 500" position="0 0 -1"
-            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: black; shader: flat">
-        </a-entity>
-    </a-entity>
+                            <a-assets timeout="1000">
+                                <a-asset-item id="TShirt" src="./assets/model-glb/shirt_baked1.glb"
+                                    response-type="arraybuffer" crossorigin="anonymous">
+                                </a-asset-item>
+                            </a-assets>
 
-    <a-entity id="box" cursor-listener geometry="primitive: box" position="0 1 2" material="color: blue"></a-entity>
-</a-scene>
+                            <a-entity model-viewer-camera>
+                                <a-entity id="camera" camera="fov: 60;"
+                                    look-controls="magicWindowTrackingEnabled: true; mouseEnabled: false; touchEnabled: false;">
+                                </a-entity>
+                                <!-- <a-entity id="rightHand" rotation="0 90 0" laser-controls="hand: right;"
+                                    raycaster="objects: .raycastable;">
+                                    <a-entity line="color: #118A7E;"></a-entity>
+                                </a-entity>
+                                <a-entity id="leftHand" rotation="0 90 0" laser-controls="hand: left;"
+                                    raycaster="objects: .raycastable;">
+                                    <a-entity line="color: #118A7E;"></a-entity>
+                                </a-entity> -->
+                            </a-entity>
 
-    
+                            <!-- bg -->
+                            <a-entity
+                                material="shader: background-gradient; colorTop:red; colorBottom: #757575; side: back"
+                                geometry="primitive: sphere; radius: 65" hide-on-enter-ar></a-entity>
+
+                            <a-entity class="model-pivot">
+                                <a-gltf-model src="#TShirt" model-viewer-el position="0 1.5 -1"> </a-gltf-model>
+                            </a-entity>
+                        </a-scene>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
 
 </body>
 
