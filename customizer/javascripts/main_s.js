@@ -26,7 +26,6 @@ if (width < height) {
     height = width;
 }
 var pixelRatio = window.devicePixelRatio;
-console.log('pixelRatio', pixelRatio);
 init();
 
 function init() {
@@ -148,7 +147,6 @@ function render() {
 var onProgress = function (xhr) {
     if (xhr.lengthComputable) {
         var percentComplete = xhr.loaded / xhr.total * 100;
-        console.log(Math.round(percentComplete, 2) + '% downloaded');
     }
 };
 
@@ -165,7 +163,6 @@ function obj2_model_load(model) {
         }
         object = null;
         object = data.detail.loaderRootNode;
-        console.log(object);
         materials = [];
         object.traverse(function (node) {
             if (node.isMesh) {
@@ -200,7 +197,6 @@ function setColorBk(color) {
         }
     });
     render();
-    console.log('color', selectedColors);
 }
 
 function changeProduct() {
@@ -284,7 +280,6 @@ function set_materials(response) {
 
 function load_materials() {
     var paths = $('#svgContainer path');
-    console.log('paths', paths.length);
     var materialContainer = '';
     for (var i = 0; i < paths.length; i++) {
         var bg = $(paths[i]).attr('fill');
@@ -303,7 +298,6 @@ function load_materials() {
 
 function load_texts() {
     var texts = $('#svgContainer text');
-    console.log('texts', texts);
     var textContainer = '';
     for (var i = 0; i < texts.length; i++) {
         var id = $(texts[i]).attr('id');
@@ -342,7 +336,6 @@ function load_text_details(idd) {
 
 function changeTeamName(e) {
 
-    console.log('e', e.target.value);
     update_svg(e.target.id, e.target.value);
 }
 
@@ -359,17 +352,14 @@ function downloadSvg(fileName) {
 }
 
 function downloadImage(value) {
-    console.info("Downloading....")
     var texts = $('#svgContainer text');
     for (var i = 0; i < texts.length; i++) {
         var id = $(texts[i]).attr('id');
-        console.log("ID:" + id + ", Value:" + $(texts[i])[0].innerHTML);
     }
     var paths = $('#svgContainer path');
     for (var i = 0; i < paths.length; i++) {
         var id = $(paths[i]).attr('id');
         $('#svgContainer path')[4].getAttribute("fill")
-        console.log("ID:" + id + ", Value:" + $(paths[i])[0].getAttribute("fill"));
     }
     downloadSvg("test.png")
 }
