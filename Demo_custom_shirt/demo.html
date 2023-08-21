@@ -6,40 +6,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
     <script src="https://unpkg.com/aframe-orbit-controls@1.3.0/dist/aframe-orbit-controls.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.js"></script>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        .bg-main {
+            background-color: #149CEA;
+        }
+
+        .btn-feature {
+            border: 0;
+            width: 80%;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1em;
+            background: rgb(64, 192, 87);
+            transition: all 0.2s;
+            border-radius: 3px;
+        }
+
+        .btn-feature:hover {
+            background-image: linear-gradient(to right, rgb(250, 82, 82), rgb(250, 82, 82) 16.65%, rgb(190, 75, 219) 16.65%, rgb(190, 75, 219) 33.3%, rgb(76, 110, 245) 33.3%, rgb(76, 110, 245) 49.95%, rgb(64, 192, 87) 49.95%, rgb(64, 192, 87) 66.6%, rgb(250, 176, 5) 66.6%, rgb(250, 176, 5) 83.25%, rgb(253, 126, 20) 83.25%, rgb(253, 126, 20) 100%, rgb(250, 82, 82) 100%);
+            animation: 2s linear dance6123 infinite;
+            transform: scale(1.1) translateY(-1px);
+        }
+
+        @keyframes dance6123 {
+            to {
+                background-position: var(--width);
+            }
+        }
+
+    </style>
+
 </head>
 
-<body>
-    <div style="width: 80vw; height: 80vh; position: relative;">
-        <div class="menu-customize" style="position: absolute; width: 200px; height: 100%; z-index: 2; opacity: 0.5;">
-            <ul>
-                <h3>Danh sách các mesh trong obj</h3>
-                <div id="menuShow">
-
-                </div>
-                <li><button id="tomau" type="button">tô màu</button></li>
-                <li><button id="back" type="button">back</button></li>
-            </ul>
-        </div>
-        <a-scene style="width: 100%; height: 100%;" embedded environment="preset: forest" vr-mode-ui="enabled: false"
-            ar-mode-ui="enabled: true">
-
-            <a-light type="ambient" color="white" target="#model">
-                <a-gltf-model id="model" src="./first_clothing_item.glb" shadow position="0 1.6 -0.5">
-                </a-gltf-model>
-            </a-light>
-            <!-- <a-image src="./assets/image/logo.png" shadow position="0 1.6 0.1" side="double"></a-image> -->
-
-            <a-entity camera look-controls="enabled: false"
-                orbit-controls="target: 0 1.6 -0.5; minDistance: 0.5; maxDistance: 20; initialPosition: 0 2 0.1; rotateSpeed: 0.5">
-            </a-entity>
-
-
-        </a-scene>
+<body class="bg-light">
+    <div class="w-100 bg-main text-center d-flex align-items-center justify-content-center"
+        style="height: 40px; margin-bottom: 3px;">
+        <a href="/">
+            <img src="../Shop/assets/images/logo/logo-no-background.png" style="height: 30px;" alt="" srcset="">
+        </a>
     </div>
+    <div class="container-fluid">
+        <div class="row gx-2">
+            <div class="col-12 col-md-3 col-xl-2" style="height: calc(100vh - 40px - 3px); overflow-y: auto;">
+                <div class="list-obj text-center">
+                    <h4>Vị trí thao tác</h4>
+                    
+                </div>
+                <div class="border-top my-2"></div>
+                <div class="flex-shrink-0 w-100">
+                    <ul class="list-unstyled ps-0">
+                        <li class="mb-2 mt-2 d-flex flex-column align-items-center justify-content-center">
+                            <button id="btn-color-box" class="btn-feature btn btn-toggle rounded border-0 collapsed text-center w-75"
+                                data-bs-toggle="collapse" data-bs-target="#color-box" aria-expanded="true">
+                                Màu sắc
+                            </button>
+                            <div class="collapse show w-100" id="color-box">
+                                <div id="colorPicker"></div>
+                            </div>
+                        </li>
+                        <li class="border-top my-3"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl-8" style="height: calc(100vh - 40px - 3px);">
+                <a-scene class="w-100 h-100" embedded environment="preset: forest" vr-mode-ui="enabled: true"
+                    ar-mode-ui="enabled: true">
+                    <a-light type="ambient" color="white" target="#model">
+                        <a-gltf-model id="model" src="./first_clothing_item.glb" shadow position="0 1.6 -0.5">
+                        </a-gltf-model>
+                    </a-light>
+                    <!-- <a-image src="./assets/image/logo.png" shadow position="0 1.6 0.1" side="double"></a-image> -->
+
+                    <a-entity camera look-controls="enabled: false"
+                        orbit-controls="target: 0 1.6 -0.5; minDistance: 0.5; maxDistance: 20; initialPosition: 0 2 0.1; rotateSpeed: 0.5">
+                    </a-entity>
+                </a-scene>
+            </div>
+            <div class="col-12 col-md-3 col-xl-2" style="height: calc(100vh - 40px - 3px); overflow-y: auto;"></div>
+        </div>
+        <div class="menu-customize h-100" style="z-index: 2; opacity: 0.8;">
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro/dist/iro.min.js"></script>
+    <script>
+        var colorPicker = new iro.ColorPicker("#colorPicker", {
+            color: "rgb(255, 0, 0)",
+            borderWidth: 1,
+            borderColor: "#ffffff",
+        });
+        var colorBox = document.querySelector('#color-box');
+        var btnColorBox = document.querySelector('#btn-color-box');
+        window.addEventListener('load', () => {
+            colorPicker.resize(parseFloat(window.getComputedStyle(colorBox).width))
+        });
+        window.addEventListener('resize', () => {
+            colorPicker.resize(parseFloat(window.getComputedStyle(colorBox).width))
+        });
+        btnColorBox.addEventListener('click', () => {
+            colorPicker.resize(parseFloat(window.getComputedStyle(colorBox).width))
+        })
+    </script>
+
+
 
 
     <script>
@@ -127,6 +226,7 @@
 
         });
     </script>
+
 
 </body>
 
