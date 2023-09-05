@@ -20,6 +20,9 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="./assets/library/color-picker/color-picker.min.css">
+    <link rel="stylesheet" href="./assets/library/color-picker/color-picker.min.js">
     <style>
         .bg-color {
             background-color: #212121;
@@ -170,7 +173,6 @@
             border-color: #4c8bf5;
             box-shadow: 0 0 20px #4c8bf580;
         }
-
     </style>
 
 </head>
@@ -209,7 +211,7 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active button-universe mt-1 mb-1" id="pills-home-tab"
                             data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab"
-                            aria-controls="pills-home" aria-selected="true">Tô màu</button>
+                            aria-controls="pills-home" aria-selected="true">Đơn màu</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link button-universe mt-1 mb-1" id="pills-profile-tab" data-bs-toggle="pill"
@@ -224,7 +226,10 @@
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                        aria-labelledby="pills-home-tab">...</div>
+                        aria-labelledby="pills-home-tab">
+                        <div id="color-picker-dark-theme"></div>
+
+                    </div>
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         ...</div>
                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
@@ -235,134 +240,145 @@
                 <div>
                     <div class="radio-button-container">
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio1" name="radio-group">
-                            <label class="radio-button__label" for="radio1">
-                                <span class="radio-button__custom"></span>
-                                none
-                            </label>
-                        </div>
-                        <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio2" name="radio-group">
-                            <label class="radio-button__label" for="radio2">
+                            <input type="radio" class="radio-button__input" value="default" id="default"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="default">
                                 <span class="radio-button__custom"></span>
                                 default
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio3" name="radio-group">
-                            <label class="radio-button__label" for="radio3">
+                            <input type="radio" class="radio-button__input" value="contact" id="contact"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="contact">
                                 <span class="radio-button__custom"></span>
                                 contact
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="egypt" id="egypt"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="egypt">
                                 <span class="radio-button__custom"></span>
                                 egypt
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="checkerboard" id="checkerboard"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="checkerboard">
                                 <span class="radio-button__custom"></span>
                                 checkerboard
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="forest" id="forest"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="forest">
                                 <span class="radio-button__custom"></span>
                                 forest
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="goaland" id="goaland"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="goaland">
                                 <span class="radio-button__custom"></span>
                                 goaland
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="yavapai" id="yavapai"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="yavapai">
                                 <span class="radio-button__custom"></span>
                                 yavapai
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="goldmine" id="goldmine"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="goldmine">
                                 <span class="radio-button__custom"></span>
                                 goldmine
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="threetowers" id="threetowers"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="threetowers">
                                 <span class="radio-button__custom"></span>
                                 threetowers
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="poison" id="poison"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="poison">
                                 <span class="radio-button__custom"></span>
                                 poison
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="arches" id="arches"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="arches">
                                 <span class="radio-button__custom"></span>
                                 arches
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="tron" id="tron"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="tron">
                                 <span class="radio-button__custom"></span>
                                 tron
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="japan" id="japan"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="japan">
                                 <span class="radio-button__custom"></span>
                                 japan
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="dream" id="dream"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="dream">
                                 <span class="radio-button__custom"></span>
                                 dream
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="volcano" id="volcano"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="volcano">
                                 <span class="radio-button__custom"></span>
                                 volcano
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="starry" id="starry"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="starry">
                                 <span class="radio-button__custom"></span>
                                 starry
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="osiris" id="osiris"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="osiris">
                                 <span class="radio-button__custom"></span>
                                 osiris
                             </label>
                         </div>
                         <div class="radio-button">
-                            <input type="radio" class="radio-button__input" id="radio4" name="radio-group">
-                            <label class="radio-button__label" for="radio4">
+                            <input type="radio" class="radio-button__input" value="moon" id="moon"
+                                name="radio-bg-style">
+                            <label class="radio-button__label" for="moon">
                                 <span class="radio-button__custom"></span>
                                 moon
                             </label>
@@ -370,17 +386,18 @@
                     </div>
                     <div class="d-flex mt-2">
                         <label for="favcolorSky">Màu nền bầu trời:</label>
-                        <input class="mx-2" type="color" id="favcolorSky" name="favcolorSky" value="#ffffff"><br><br>
+                        <input class="mx-2" type="color" id="bgColorSky" name="favcolorSky" value="#000000"><br><br>
                     </div>
                     <div class="d-flex">
                         <label for="favcolorGround">Màu nền mặt đất:</label>
-                        <input class="mx-2" type="color" id="favcolorGround" name="favcolorGround" value="#ffffff"><br><br>
+                        <input class="mx-2" type="color" id="bgColorGround" name="favcolorGround"
+                            value="#000000"><br><br>
                     </div>
                 </div>
 
             </div>
             <div class="col-12 col-md-6 col-xl-8" style="height: calc(100vh - 40px - 3px);">
-                <a-scene class="w-100 h-100" embedded
+                <a-scene id="sceneMain" class="w-100 h-100" embedded
                     environment="preset: default; skyColor: skyBlue; groundColor: skyBlue;" vr-mode-ui="enabled: true"
                     ar-mode-ui="enabled: true">
                     <a-light type="ambient" color="white" target="#model">
@@ -411,10 +428,37 @@
 
 
 
+    <script>
+        let dark_color_picker = new ColorPickerControl({ container: document.getElementById('#color-picker-dark-theme'), theme: 'dark' });
+        dark_color_picker.on('change', (color) => {
+        });
+    </script>
 
 
+    <script>
+        //color bg
+        window.addEventListener('load', () => {
+            var bgStyleScenes = Array.from(document.querySelectorAll('input[name="radio-bg-style"]'));
+            bgStyleScenes.forEach((rd) => {
+                rd.addEventListener('change', (e) => {
+                    if (rd.checked) {
+                        document.getElementById('sceneMain').setAttribute('environment', 'preset', rd.value);
+                    }
+                });
+            });
 
+            var bgColorSky = document.getElementById('bgColorSky');
+            bgColorSky.addEventListener('change', () => {
+                document.getElementById('sceneMain').setAttribute('environment', 'skyColor', bgColorSky.value);
+            });
 
+            var bgColorGround = document.getElementById('bgColorGround');
+            bgColorGround.addEventListener('change', () => {
+                document.getElementById('sceneMain').setAttribute('environment', 'groundColor', bgColorGround.value);
+                console.log(bgColorGround.value)
+            });
+        });
+    </script>
 
 
 
