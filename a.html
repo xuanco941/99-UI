@@ -1,0 +1,79 @@
+<div id="PopupUpdateWalletView2" style="position: fixed;z-index: 110; width: 40%; min-width: 400px; top:40%; left: 50%;transform: translate(-50%, -50%);">
+    <div class="box" style="padding: 12px 10px">
+        <div class="box-header with-border">
+            <h2 class="box-title">Đổi ví mới</h2>
+            <div class="box-tools pull-right">
+                <button onclick="ClosePopupUpdateWalletView2()" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+            </div>
+        </div>
+        <div class="box-body" style="font-size: 16px;">
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-xs-3">Ví mới: </div>
+                <div class="col-xs-9">
+                    <input type="text" v-model="data.newWallet" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="box-footer" style="display:flex;justify-content:center;">
+            <a class="btn btn-success" v-on:click="UpdateWallet2()" style="margin-top: 10px; margin-bottom: 15px;">OK</a>
+            <a onclick="ClosePopupUpdateWalletView2()" class="btn" style="margin-top: 10px; margin-bottom: 15px;">Hủy</a>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+
+<script>
+    function ClosePopupUpdateWalletView2() {
+        $("#PopupUpdateWalletView2").remove();
+        $("#bgLoading").hide();
+    }
+</script>
+<script>
+    var appUpdateWallet2 = new Vue({
+        el: "#PopupUpdateWalletView2",
+        data: {
+            data: {},
+        },
+        methods: {
+            init: async function () {
+                this.data.newWallet = "";
+
+                this.$forceUpdate();
+            },
+            UpdateWallet2: async function () {
+                var self = this;
+                $.ajax({
+                    type: "POST",
+                    url: window.location.origin + "/Partner/UpdateWallet2",
+                    data: self.data,
+                    success: function (res) {
+                        if (res.Response >= 0 && JSON.parse(res.Data).data > 0) {
+                            ClosePopupUpdateWalletView2();
+                            appPartnerInfo.GetPartnerInfo();
+                            ShowAlert("Cập nhật Wallet thành công", 'success', 2500);
+                        }
+                        else {
+                            ShowAlert("Có lỗi xảy ra, không thể cập nhật.",'danger',2500);
+                        }
+                    },
+                    error: function () {
+                        bootbox.alert("Hệ thống bận, vui lòng quay lại sau!");
+                    }
+                });
+            },
+    
+        },
+        mounted() {
+            this.init();
+        },
+        computed: {
+
+        }
+    })
+</script>
