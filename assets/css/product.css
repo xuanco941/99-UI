@@ -1,0 +1,4 @@
+.product:hover{
+    border: 1.5px solid #149CEA;
+    cursor: pointer;
+}
