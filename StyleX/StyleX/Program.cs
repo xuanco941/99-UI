@@ -1,4 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using StyleX;
+using StyleX.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +17,25 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     option.LogoutPath = "/Access/Logout";
     option.ExpireTimeSpan = TimeSpan.FromDays(1);
 });
+
+
+builder.Services.AddDbContext<DatabaseContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings")["DefaultConnection"]));
+
+
+//http context
+builder.Services.AddHttpContextAccessor();
+
+
+
+
+
+//add configruration
+builder.Services.Configure<EmailAppSetting>(builder.Configuration.GetSection("App"));
+
+
+
+
 
 var app = builder.Build();
 
