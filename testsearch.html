@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <div id="box-img">
+
+    </div>
+    <img src="https://images.unsplash.com/photo-1468345096048-fdb10393b472?auto=format&fit=crop&w=480&q=80" alt="" srcset="">
+
+    <script type="module" src="./assets/js/search-image.js">
+    </script>
+    <script type="module">
+        import {SearchImages} from './assets/js/search-image.js';
+        console.log('a');
+        console.log(await SearchImages('cat', 40, 1));
+    </script>
+</body>
+
+</html>

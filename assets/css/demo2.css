@@ -166,5 +166,11 @@
     box-shadow: 0 0 20px #4c8bf580;
 }
 
+.product:hover{
+    border: 1.5px solid #149CEA;
+    cursor: pointer;
+}
 
-
+#model-main{
+    --progress-bar-color: #149CEA;
+}
