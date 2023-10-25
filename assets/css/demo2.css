@@ -1,6 +1,6 @@
 /* Tùy chỉnh thanh cuộn dọc */
 ::-webkit-scrollbar {
-    width: 4px; /* Độ rộng thanh cuộn */
+    width: 6px; /* Độ rộng thanh cuộn */
   }
   
   ::-webkit-scrollbar-track {

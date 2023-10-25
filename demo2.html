@@ -11,6 +11,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+        integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
+        async></script>
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -38,9 +42,9 @@
     </div>
     <div class="container-fluid">
         <div class="row gx-2">
-            <div class="col-12 col-md-3 col-xl-2"
+            <div class="col-12 col-md-3 col-xl-3 mb-3 mb-md-0"
                 style="max-height: calc(100vh - 43px); overflow-y: auto; cursor: default;">
-                <div class="list-obj">
+                <div id="appModel">
                     <h5 class="text-center mb-3 mt-2" style="color: #ccc;">MODEL</h5>
                     <div class="row g-1" style="font-size: 16px; max-height: 350px; overflow-y: auto;">
                         <div class="col-4 col-md-6 product">
@@ -52,8 +56,8 @@
                     </div>
                 </div>
                 <div class="border-top my-3"></div>
-                <h5 class="text-center mb-3 mt-2" style="color: #ccc;">BACKGROUND</h5>
                 <div id="appBackground">
+                    <h5 class="text-center mb-3 mt-2" style="color: #ccc;">BACKGROUND</h5>
                     <ul class="nav nav-pills mb-3 d-flex justify-content-between" id="pills-tab" role="tablist">
                         <li class="nav-item" style="width: 48%;" role="presentation">
                             <button style="font-size: 12px; letter-spacing: 1px;"
@@ -70,15 +74,49 @@
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-background-image" role="tabpanel">
-                            <div class="input-group mb-3">
+                            <div class="form-check form-switch d-flex align-items-center justify-content-start p-0">
+                                <input class="form-check-input mt-0 mx-0" type="checkbox"
+                                    id="flexSwitchCheckDefaultToanCanh">
+                                <label class="form-check-label mx-1" for="flexSwitchCheckDefaultToanCanh"
+                                    style="font-size: 10px;">Toàn cảnh</label>
+                            </div>
+                            <div class="input-group mb-1">
                                 <input style="box-shadow: none;" type="text" class="form-control form-control-sm"
                                     placeholder="Tìm kiếm hình ảnh" aria-describedby="button-search-image-bg">
                                 <button class="btn btn-outline-primary" type="button" id="button-search-image-bg">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </button>
                             </div>
-                            <div id="box-img">
-
+                            <div class="row gx-1 gy-1" data-masonry='{"percentPosition": true, "resize": true}'
+                                style="margin-top: 12px;">
+                                <div class="col-6 col-md-4">
+                                    <img class="mw-100"
+                                        src="https://images.unsplash.com/photo-1468345096048-fdb10393b472" alt=""
+                                        srcset="">
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <img class="mw-100" src="https://images.unsplash.com/photo-1557408938-0f220f49bca1"
+                                        alt="" srcset="">
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <img class="mw-100"
+                                        src="https://images.unsplash.com/photo-1574616619039-fbac62b56994" alt=""
+                                        srcset="">
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <img class="mw-100"
+                                        src="https://images.unsplash.com/photo-1565099234914-d4580c604b0b" alt=""
+                                        srcset="">
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <img class="mw-100"
+                                        src="https://images.unsplash.com/photo-1576581531862-3cd33b8a2db6" alt=""
+                                        srcset="">
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <img class="mw-100" src="https://images.unsplash.com/photo-1557408938-0f220f49bca1"
+                                        alt="" srcset="">
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="pills-background-color" role="tabpanel">
@@ -89,14 +127,15 @@
                 </div>
 
             </div>
-            <div class="col-12 col-md-6 col-xl-8" style="height: calc(100vh - 40px - 3px);">
+            <div class="col-12 col-md-6 col-xl-6" style="height: calc(100vh - 40px - 3px);">
                 <model-viewer id="model-main" class="w-100 h-100" alt=""
                     src="./assets/model-glb/cresent_witch_clothes.glb" ar shadow-intensity="1" camera-controls
                     disable-tap auto-rotate autoplay>
                 </model-viewer>
             </div>
-            <div class="col-12 col-md-3 col-xl-2"
-                style="max-height: calc(100vh - 40px - 3px); overflow-y: auto; cursor: default;"></div>
+            <div class="col-12 col-md-3 col-xl-3 mt-3 mt-md-0"
+                style="max-height: calc(100vh - 40px - 3px); overflow-y: auto; cursor: default;">
+            </div>
         </div>
         <div class="menu-customize h-100" style="z-index: 2; opacity: 0.8;">
 
@@ -104,11 +143,17 @@
     </div>
 
 
+    <script type="module" src="./assets/js/search-image.js">
+    </script>
     <script>
         var model = document.getElementById('#model-main');
     </script>
 
-    <script>
+    <script type="module">
+
+        import { SearchImages } from './assets/js/search-image.js';
+        console.log(await SearchImages('cat', 10, 1));
+
         //change background model
         var appBackground = new Vue({
             el: "#appBackground",
