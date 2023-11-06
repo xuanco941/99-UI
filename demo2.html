@@ -20,11 +20,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 
-    <!--vue2 development-->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <!--vue production-->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
-
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
 
 
@@ -40,11 +35,10 @@
     </div>
     <div class="container-fluid">
         <div class="row gx-2">
-            <div class="col-12 col-md-3 col-xl-2 mb-3 mb-md-0"
-                style="max-height: calc(100vh - 43px); overflow-y: auto; cursor: default;">
-                <div id="appModel">
-                    <h5 class="text-center mb-3 mt-2" style="color: #ccc;">MODEL</h5>
-                    <div class="row g-1" style="font-size: 16px; max-height: 350px; overflow-y: auto;">
+            <div class="col-12 col-md-3 col-xl-2 mb-3 mb-md-0" style="height: calc(100vh - 43px); cursor: default;">
+                <div id="appModel" class="h-50">
+                    <h6 class="text-center mb-3 mt-2" style="color: #ccc; height: 30px;">MODEL</h6>
+                    <div class="row g-1" style="font-size: 16px;overflow-y: auto;height: calc(100% - 30px);">
                         <div class="col-4 col-md-6 product">
                             <img class="mw-100 mh-100" src="./assets/images/products/1.webp" alt="" srcset="">
                         </div>
@@ -54,23 +48,25 @@
                     </div>
                 </div>
                 <div class="border-top my-3"></div>
-                <div id="appBackground">
-                    <h5 class="text-center mb-3 mt-2" style="color: #ccc;">BACKGROUND</h5>
-                    <ul class="nav nav-pills mb-3 d-flex justify-content-between" id="pills-tab" role="tablist">
-                        <li class="nav-item" style="width: 48%;" role="presentation">
-                            <button style="font-size: 12px; letter-spacing: 1px;"
-                                class="w-100 nav-link active button-universe mt-1 mb-1" data-bs-toggle="pill"
-                                data-bs-target="#pills-background-image" type="button" role="tab"
-                                aria-controls="pills-background-image" aria-selected="false">Hình ảnh</button>
-                        </li>
-                        <li class="nav-item" style="width: 48%;" role="presentation">
-                            <button style="font-size: 12px; letter-spacing: 1px;"
-                                class="w-100 nav-link button-universe mt-1 mb-1" data-bs-toggle="pill"
-                                data-bs-target="#pills-background-color" type="button" role="tab"
-                                aria-controls="pills-background-color" aria-selected="true">Đơn màu</button>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="pills-tabContent">
+                <div id="appBackground" class="h-50">
+                    <div style="height: 80px;">
+                        <h6 class="text-center mb-2 mt-2" style="color: #ccc;">BACKGROUND</h6>
+                        <ul class="nav nav-pills mb-2 d-flex justify-content-between" id="pills-tab" role="tablist">
+                            <li class="nav-item" style="width: 48%;" role="presentation">
+                                <button style="font-size: 11px; letter-spacing: 1px;"
+                                    class="w-100 nav-link active button-universe mt-1 mb-1" data-bs-toggle="pill"
+                                    data-bs-target="#pills-background-image" type="button" role="tab"
+                                    aria-controls="pills-background-image" aria-selected="false">Hình ảnh</button>
+                            </li>
+                            <li class="nav-item" style="width: 48%;" role="presentation">
+                                <button style="font-size: 11px; letter-spacing: 1px;"
+                                    class="w-100 nav-link button-universe mt-1 mb-1" data-bs-toggle="pill"
+                                    data-bs-target="#pills-background-color" type="button" role="tab"
+                                    aria-controls="pills-background-color" aria-selected="true">Đơn màu</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content h-75 mh-75" id="pills-tabContent" style="overflow-y: auto; height: calc(100% - 80px);">
                         <div class="tab-pane fade show active" id="pills-background-image" role="tabpanel">
                             <div class="form-check form-switch d-flex align-items-center justify-content-start p-0">
                                 <input class="form-check-input mt-0 mx-0" type="checkbox"
@@ -78,36 +74,24 @@
                                 <label class="form-check-label mx-1" for="flexSwitchCheckDefaultToanCanh"
                                     style="font-size: 10px;">Toàn cảnh</label>
                             </div>
-                            <div class="input-group mb-1">
+                            <div class="input-group input-group-sm mb-1">
                                 <input style="box-shadow: none;" type="text" class="form-control form-control-sm"
-                                    placeholder="Tìm kiếm hình ảnh" aria-describedby="button-search-image-bg">
-                                <button class="btn btn-outline-primary" type="button" id="button-search-image-bg">
+                                    placeholder="Tìm kiếm hình ảnh" aria-describedby="button-search-image-bg"
+                                    v-model="data.querySearch" v-on:keyup.enter="SearchImages()">
+                                <button class="btn btn-outline-primary" type="button" id="button-search-image-bg"
+                                    v-on:click="SearchImages()">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </button>
                             </div>
-                            <div class="row mt-2 w-100" data-masonry='{"percentPosition": true}'>
-                                <img class="col-4 px-1 py-1"
-                                    src="https://images.unsplash.com/photo-1468345096048-fdb10393b472" alt="" srcset="">
-
-                                <img class="col-4 px-1 py-1"
-                                    src="https://images.unsplash.com/photo-1557408938-0f220f49bca1" alt="" srcset="">
-
-                                <img class="col-4 px-1 py-1"
-                                    src="https://images.unsplash.com/photo-1574616619039-fbac62b56994" alt="" srcset="">
-
-                                <img class="col-4 px-1 py-1"
-                                    src="https://images.unsplash.com/photo-1565099234914-d4580c604b0b" alt="" srcset="">
-
-                                <img class="col-4 px-1 py-1"
-                                    src="https://images.unsplash.com/photo-1576581531862-3cd33b8a2db6" alt="" srcset="">
-
-                                <img class="col-4 px-1 py-1"
-                                    src="https://images.unsplash.com/photo-1557408938-0f220f49bca1" alt="" srcset="">
+                            <div class="row mt-2 w-100 justify-content-center mx-0">
+                                <!--data-masonry='{"percentPosition": true}'!-->
+                                <img style="max-width: 100%;" class="col-4 px-1 py-1" v-for="image in listImages"
+                                    v-bind:src="image" v-bind:alt="image" v-bind:srcset="image">
                             </div>
                         </div>
                         <div class="tab-pane fade" id="pills-background-color" role="tabpanel">
-                            <input style="height: 100px;" type="color" class="form-control form-control-color w-100"
-                                value="#563d7c" title="Choose your color">
+                            <input style="height: 100px;" type="color" class="form-control form-control-color w-100" v-model="data.backgroundColor"
+                             title="Chọn màu nền" v-on:change="ChangeBackground(2)">
                         </div>
                     </div>
                 </div>
@@ -131,14 +115,16 @@
     <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
         integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"
         async></script>
+    <!--vue2 development-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!--vue production-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
 
-    <script type="module" src="./assets/js/search-image.js">
-    </script>
     <script>
         var model = document.getElementById('#model-main');
     </script>
 
-    <script type="module">
+    <script type="module" defer>
 
         import { SearchImages } from './assets/js/search-image.js';
         // console.log(await SearchImages('cat', 10, 1));
@@ -148,16 +134,39 @@
             el: "#appBackground",
             data: {
                 data: {},
+                listImages: [],
+                type: 2 //0-toàn cảnh, 1-hình ảnh, 2 đơn màu
             },
             methods: {
                 init: async function () {
 
-                    this.backgroundColor = 'transparent';
-                    this.backgroundImage = '';
-                    this.skyBoxImage = '';
+                    this.data.backgroundColor = 'transparent';
+                    this.data.backgroundImage = '';
+                    this.data.skyBoxImage = '';
+                    this.data.querySearch = '';
+
 
                     this.$forceUpdate();
                 },
+                SearchImages: async function () {
+                    this.listImages = await SearchImages(this.data.querySearch, 12, 1);
+                    this.listImages = this.listImages.map(e => e.url = 'https://images.unsplash.com/' + e.url + '?auto=format&fit=crop&w=480&q=80');
+                    console.log(this.listImages);
+                },
+                ChangeBackground: function (bg){
+                    var model = document.getElementById('#model-main');
+                    console.log(model)
+                    var self = this;
+                    if(self.type==0){
+
+                    }
+                    else if(self.type==1){
+
+                    }
+                    else{
+                        model.style.backgroundColor = self.data.backgroundColor;
+                    }
+                }
 
             },
             mounted() {
