@@ -173,4 +173,7 @@
 
 #model-main{
     --progress-bar-color: #149CEA;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }

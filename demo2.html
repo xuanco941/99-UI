@@ -34,7 +34,7 @@
     <div class="container-fluid">
         <div class="row gx-2">
             <div class="col-12 col-md-3 col-xl-2 mb-3 mb-md-0" style="height: calc(100vh - 43px); cursor: default;">
-                <div id="appModel" class="h-50">
+                <div id="appSelectModel" class="h-50">
                     <h6 class="text-center mb-3 mt-2" style="color: #ccc; height: 30px;">MODEL</h6>
                     <div class="row g-1" style="font-size: 16px;overflow-y: auto;height: calc(100% - 30px);">
                         <div class="col-4 col-md-6 product">
@@ -100,25 +100,45 @@
                 </div>
 
             </div>
-            <div class="col-12 col-md-6 col-xl-8" style="height: calc(100vh - 40px - 3px);">
+            <div class="col-12 col-md-6 col-xl-8" style="height: calc(100vh - 43px);">
                 <model-viewer id="model-main" class="w-100 h-100" alt=""
                     src="./assets/model-glb/cresent_witch_clothes.glb" ar shadow-intensity="1" camera-controls
-                    disable-tap auto-rotate autoplay
-                    style="background-repeat: no-repeat; background-size: cover; background-position: center center;">
+                    disable-tap auto-rotate autoplay>
                 </model-viewer>
             </div>
-            <div class="col-12 col-md-3 col-xl-2 mt-3 mt-md-0"
-                style="max-height: calc(100vh - 40px - 3px); overflow-y: auto; cursor: default;">
+            <div class="col-12 col-md-3 col-xl-2 mt-3 mt-md-0" style="max-height: calc(100vh - 43px);cursor: default;">
+                <div id="appCustomize" class="h-100" style="z-index: 2; opacity: 0.8;">
+                    <nav>
+                        <div class="nav nav-tabs justify-content-between" id="nav-tab" role="tablist"
+                            style="font-size: 0.7rem;">
+                            <button class="nav-link active" id="nav-design-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-design" type="button" role="tab" aria-controls="nav-design"
+                                aria-selected="true">Thiết kế</button>
+                            <button class="nav-link" id="nav-share-tab" data-bs-toggle="tab" data-bs-target="#nav-share"
+                                type="button" role="tab" aria-controls="nav-share" aria-selected="false">Chia
+                                sẻ</button>
+                            <button class="nav-link" id="nav-download-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-download" type="button" role="tab" aria-controls="nav-download"
+                                aria-selected="false">Tải về</button>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-design" role="tabpanel"
+                            aria-labelledby="nav-design-tab">...</div>
+                        <div class="tab-pane fade" id="nav-share" role="tabpanel" aria-labelledby="nav-share-tab">...
+                        </div>
+                        <div class="tab-pane fade" id="nav-download" role="tabpanel" aria-labelledby="nav-download-tab">
+                            ...</div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="menu-customize h-100" style="z-index: 2; opacity: 0.8;">
 
-        </div>
     </div>
 
     <!--vue2 development-->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <!--vue production-->
+    <!--vue2 production-->
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
 
     <script type="module">
@@ -132,36 +152,39 @@
             data: {
                 model: {},
                 data: {},
-                querySearch: 'night sky',
+                querySearch: '',
                 listImages: [],
                 typeImage: false,
                 loadingImage: true
             },
             methods: {
                 init: async function () {
-
                     var self = this;
-                    document.getElementById("model-main").addEventListener('load', (e) => {
-                        self.model = e.target;
-                    });
 
                     this.data.type = 0; //2-toàn cảnh, 1-hình ảnh, 0 đơn màu
                     this.data.background = 'transparent';
 
+                    document.getElementById("model-main").addEventListener('load', (e) => {
+                        self.model = e.target;
+                        self.ChangeBackground(self.data.type);
+                    });
 
                     await this.SearchImages();
-                    this.ChangeBackground(this.data.type);
+
                     this.$forceUpdate();
                 },
                 SearchImages: async function () {
                     var self = this;
                     self.loadingImage = true;
-                    self.listImages = await SearchImages(self.querySearch, 15, 1);
-                    self.listImages = self.listImages.map(e => e.url = 'https://images.unsplash.com/' + e.url + '?auto=format&fit=crop&w=500&h=500');
+                    var images = await SearchImages(self.querySearch, 15, 1);
+                    if (images.length > 0) {
+                        self.listImages = images.map(e => `https://images.unsplash.com/${e.url.trim()}?auto=format&fit=crop&w=500&h=500`);
+                    }
                     self.loadingImage = false;
                 },
                 ChangeBackground: function (type) {
                     var self = this;
+
                     if (type == 2) self.data.type = 2;
                     else if (type == 1) self.data.type = 1;
                     else self.data.type = 0;
@@ -191,7 +214,7 @@
                     this.data.background = url;
                     this.ChangeTypeImage();
                 },
-                ChangeTypeImage: function (){
+                ChangeTypeImage: function () {
                     var type = this.typeImage == true ? 2 : 1;
                     this.ChangeBackground(type);
                 }
@@ -201,33 +224,36 @@
             mounted() {
                 this.init();
             },
-            computed: {
-
-            }
         });
 
 
 
     </script>
 
-
-
-
-
     <script type="module">
-
+        import { SearchImages } from './assets/js/search-image.js';
         const modelViewer = document.querySelector("model-viewer#model-main");
 
         modelViewer.addEventListener("load", () => {
 
             let materials = modelViewer.model.materials;
-            console.log(materials[0]);
+            materials[0].name = "Thân áo";
 
             const changeColor = (event) => {
                 const material = modelViewer.materialFromPoint(event.clientX, event.clientY);
-                if (material != null) {
-                    material.pbrMetallicRoughness.setBaseColorFactor([Math.random(), Math.random(), Math.random()]);
+                if(!material) return;
+                for (var m of materials) {
+                    if (m.name != material.name) {
+                        console.log(m)
+                        console.log(m.pbrMetallicRoughness.baseColorFactor)
+                        // var color = [...m.pbrMetallicRoughness.baseColorFactor];
+                        var color = [0,0,0];
+                        color[3] = 0;
+                        console.log(color)
+                        m.pbrMetallicRoughness.setBaseColorFactor(color);
+                    }
                 }
+
             };
 
             modelViewer.addEventListener("click", changeColor);
