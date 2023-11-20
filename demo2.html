@@ -25,18 +25,12 @@
 </head>
 
 <body class="bg-color text-white">
-    <div class="w-100 bg-color text-center d-flex align-items-center justify-content-center"
-        style="height: 40px; margin-bottom: 3px; cursor: default;">
-        <a href="/">
-            <img src="./assets/images/logo/logo-no-background-blue.png" style="height: 30px;" alt="" srcset="">
-        </a>
-    </div>
     <div class="container-fluid">
         <div class="row gx-2">
-            <div class="col-12 col-md-3 col-xl-2 mb-3 mb-md-0" style="height: calc(100vh - 43px); cursor: default;">
-                <div id="appSelectModel" class="h-50">
+            <div class="col-12 col-md-3 col-xl-2 mb-3 mb-md-0" style="height: 100%; cursor: default;">
+                <div id="appSelectModel" class="h-4">
                     <h6 class="text-center mb-3 mt-2" style="color: #ccc; height: 30px;">MODEL</h6>
-                    <div class="row g-1" style="font-size: 16px;overflow-y: auto;height: calc(100% - 30px);">
+                    <div class="row g-1" style="font-size: 16px;overflow-y: auto;max-height: 400px;">
                         <div class="col-4 col-md-6 product">
                             <img class="mw-100 mh-100" src="./assets/images/products/1.webp" alt="" srcset="">
                         </div>
@@ -46,7 +40,7 @@
                     </div>
                 </div>
                 <div class="border-top my-3"></div>
-                <div id="appBackground" class="h-50">
+                <div id="appBackground" class="h-47">
                     <div style="height: 80px;">
                         <h6 class="text-center mb-2 mt-2" style="color: #ccc;">BACKGROUND</h6>
                         <ul class="nav nav-pills mb-2 d-flex justify-content-between" id="pills-tab" role="tablist">
@@ -65,7 +59,7 @@
                         </ul>
                     </div>
                     <div class="tab-content h-75 mh-75" id="pills-tabContent"
-                        style="overflow-y: auto; height: calc(100% - 80px);">
+                        style="overflow-y: auto; max-height: 400px;">
                         <div class="tab-pane fade show active" id="pills-background-image" role="tabpanel">
                             <div class="form-check form-switch d-flex align-items-center justify-content-start p-0">
                                 <input class="form-check-input mt-0 mx-0" type="checkbox" v-model="typeImage"
@@ -102,13 +96,13 @@
                 </div>
 
             </div>
-            <div class="col-12 col-md-6 col-xl-8" style="height: calc(100vh - 43px);">
+            <div class="col-12 col-md-6 col-xl-8 p-3" style="height: 100vh;">
                 <model-viewer id="model-main" class="w-100 h-100" alt=""
                     src="./assets/model-glb/cresent_witch_clothes.glb" ar shadow-intensity="1" camera-controls
                     disable-tap auto-rotate autoplay shadow-softness="0.1">
                 </model-viewer>
             </div>
-            <div class="col-12 col-md-3 col-xl-2 mt-3 mt-md-0" style="max-height: calc(100vh - 43px);cursor: default;">
+            <div class="col-12 col-md-3 col-xl-2 mt-3 mt-md-0" style="height: 100%;cursor: default;">
                 <div class="h-100" style="z-index: 2; opacity: 0.8;">
                     <nav>
                         <div class="nav nav-tabs justify-content-between" id="nav-tab" role="tablist"
@@ -128,18 +122,22 @@
                         <div class="tab-pane fade show active" id="nav-design" role="tabpanel"
                             aria-labelledby="nav-design-tab">
 
-                            <div class="flex-shrink-0 py-3 px-0 w-100">
+                            <div class="flex-shrink-0 py-3 px-0 w-100" style="height: 750px; overflow-y: auto;">
                                 <div id="app-select-position-model">
-                                    <label for="selectPositionModel" class="form-label" style="font-size: 0.9rem;">Chọn bộ phận thao tác:</label>
-                                    <select id="selectPositionModel" class="form-select" v-model="materialSelectedName" v-on:change="Select()">
+                                    <label for="selectPositionModel" class="form-label" style="font-size: 0.9rem;">Chọn
+                                        bộ phận thao tác:</label>
+                                    <select id="selectPositionModel" class="form-select" v-model="materialSelectedName"
+                                        v-on:change="Select()">
                                         <option value="">Toàn bộ phận</option>
                                         <option v-for="mat in listMaterials" v-bind:value="mat.name">{{mat.name}}
                                         </option>
                                     </select>
-                                    <div class="form-check form-switch d-flex align-items-center justify-content-end p-0 mt-1">
-                                        <input class="form-check-input mt-0 mx-0" type="checkbox" v-model="isNotHidePositionOther"
-                                            id="hideOther" v-on:change="Select()">
-                                        <label class="form-check-label mx-1" for="hideOther" style="font-size: 10px;">Không ẩn bộ phận khác</label>
+                                    <div
+                                        class="form-check form-switch d-flex align-items-center justify-content-end p-0 mt-1">
+                                        <input class="form-check-input mt-0 mx-0" type="checkbox"
+                                            v-model="isNotHidePositionOther" id="hideOther" v-on:change="Select()">
+                                        <label class="form-check-label mx-1" for="hideOther"
+                                            style="font-size: 10px;">Không ẩn bộ phận khác</label>
                                     </div>
                                 </div>
                                 <ul class="list-unstyled ps-0 mt-4">
@@ -150,19 +148,24 @@
                                             Màu sắc
                                         </button>
                                         <div class="collapse show mt-2" id="color-collapse"
-                                            style="margin-left: 1.5rem;">
+                                            style="margin-left: 1.5rem; max-height: 300px; overflow-y: auto;">
                                             <div class="d-flex align-items-center">
-                                                <input v-model="data.color" v-on:change="ChangeColor()" type="color" class="form-control form-control-color w-25 product" id="colorDesignInput">
+                                                <input v-model="data.color" v-on:input="UpdateColor()" type="color"
+                                                    class="form-control form-control-color w-25 product"
+                                                    id="colorDesignInput">
                                                 <label class="mx-2" style="font-size: 0.9rem;">Đơn màu</label>
                                             </div>
                                             <div class="border-top my-3"></div>
-                                            <div >
+                                            <div>
                                                 <div class="d-flex align-items-center">
-                                                    <input hidden type="file" id="uploadImg" v-model="data.imageTexture" v-on:change="ChangeImage(data.imageTexture)">
-                                                    <label for="uploadImg" class="w-25" role="button">
-                                                        <img src="./assets/images/bg_1.jpg" class="w-100 product" style="border-radius: 5px;">
+                                                    <input hidden type="file" id="uploadImgColor" accept="image/*"
+                                                        v-on:change="GetUrlFileUpload">
+                                                    <label for="uploadImgColor" class="w-25" role="button">
+                                                        <img v-bind:src="data.imageTexture" class="w-100 product"
+                                                            style="border-radius: 5px;">
                                                     </label>
-                                                    <label class="mx-2" style="font-size: 0.9rem;">Kết cấu màu từ ảnh</label>
+                                                    <label class="mx-2" style="font-size: 0.9rem;">Kết cấu màu từ
+                                                        ảnh</label>
                                                 </div>
 
                                                 <div class="mt-3">
@@ -236,6 +239,14 @@
 
         import { SearchImages } from './assets/js/search-image.js';
         // console.log(await SearchImages('cat', 10, 1));
+        function hexToRgb(hex) {
+            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
 
 
         var appBackground = new Vue({
@@ -324,7 +335,12 @@
                 model: {},
                 listMaterials: [],
                 materialSelectedName: "",
-                isNotHidePositionOther: false
+                isNotHidePositionOther: false,
+                color: {
+                    r: 1,
+                    g: 1,
+                    b: 1
+                }
             },
             methods: {
                 init: async function () {
@@ -345,7 +361,7 @@
                         //set tất cả material của model về màu mặc định
                         for (var m of self.listMaterials) {
                             m.setAlphaMode("OPAQUE");
-                            m.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 1]);
+                            m.pbrMetallicRoughness.setBaseColorFactor([self.color.r, self.color.g, self.color.b, 1]);
                         }
                         return;
                     }
@@ -353,11 +369,11 @@
                     for (var m of self.listMaterials) {
                         if (m.name != self.materialSelectedName) {
                             m.setAlphaMode("BLEND");
-                            m.pbrMetallicRoughness.setBaseColorFactor([255, 255, 255, 0.05]);
+                            m.pbrMetallicRoughness.setBaseColorFactor([self.color.r, self.color.g, self.color.b, 0.05]);
                         }
                         else {
                             m.setAlphaMode("OPAQUE");
-                            m.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 1]);
+                            m.pbrMetallicRoughness.setBaseColorFactor([self.color.r, self.color.g, self.color.b, 1]);
                         }
                     }
 
@@ -377,14 +393,14 @@
                 data: {},
                 querySearch: '',
                 listImages: [],
-                loadingImage: true
+                loadingImage: true,
             },
             methods: {
                 init: async function () {
                     var self = this;
 
-                    this.data.imageTexture = ""; 
-                    this.data.color = [1,1,1,1];
+                    this.data.imageTexture = "./assets/images/none.svg";
+                    this.data.color = '';
 
                     await this.SearchImages();
 
@@ -399,6 +415,42 @@
                     }
                     self.loadingImage = false;
                 },
+                UpdateColor: function () {
+                    let color = hexToRgb(this.data.color);
+                    appSelect.color.r = color.r;
+                    appSelect.color.g = color.g;
+                    appSelect.color.b = color.b;
+
+
+
+                    if (!appSelect.materialSelectedName) {
+                        for (var m of appSelect.listMaterials) {
+                            m.pbrMetallicRoughness.setBaseColorFactor(this.data.color);
+                        }
+                    }
+                    else {
+                        var mat = appSelect.listMaterials.find(e => e.name == appSelect.materialSelectedName);
+                        mat.pbrMetallicRoughness.setBaseColorFactor(this.data.color);
+                    }
+                    
+                    console.log(this.data.color)
+                    console.log(appSelect.color)
+                    console.log(appSelect.model.model)
+                },
+                ChangeImage: function (url) {
+                    this.data.imageTexture = url;
+                    console.log(this.data.imageTexture);
+                    this.$forceUpdate();
+
+                },
+                GetUrlFileUpload: function (e) {
+                    var self = this;
+                    let file = e.target.files[0];
+                    if (file && file['type'].split('/')[0] === 'image') {
+                        let url = URL.createObjectURL(file);
+                        self.ChangeImage(url);
+                    }
+                }
 
 
             },
