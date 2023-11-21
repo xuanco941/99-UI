@@ -97,8 +97,9 @@
 
             </div>
             <div class="col-12 col-md-6 col-xl-8 p-3" style="height: 100vh;">
-                <model-viewer id="model-main" class="w-100 h-100" alt="" src="./assets/model-glb/maid_costume.glb" ar
-                    shadow-intensity="1" camera-controls disable-tap auto-rotate autoplay shadow-softness="0.1">
+                <model-viewer id="model-main" class="w-100 h-100" alt=""
+                    src="./assets/model-glb/cresent_witch_clothes.glb" ar shadow-intensity="1" camera-controls
+                    disable-tap auto-rotate autoplay shadow-softness="0.1">
                 </model-viewer>
             </div>
             <div class="col-12 col-md-3 col-xl-2 mt-3 mt-md-0" style="height: 100%;cursor: default;">
@@ -251,8 +252,21 @@
                 b: parseInt(result[3], 16)
             } : null;
         }
+        function rgbToLinearRGB(rgb) {
+            // Chuẩn hóa giá trị màu từ 0-255 về 0-1
+            const linearRGB = rgb.map(val => val / 255.0);
 
+            // Chuyển đổi không gian màu sRGB sang không gian màu tuyến tính
+            const linearized = linearRGB.map(val => {
+                if (val <= 0.04045) {
+                    return val / 12.92;
+                } else {
+                    return Math.pow((val + 0.055) / 1.055, 2.4);
+                }
+            });
 
+            return { r: linearized[0], g: linearized[1], b: linearized[2] };
+        }
         var appBackground = new Vue({
             el: "#appBackground",
             data: {
@@ -340,11 +354,6 @@
                 listMaterials: [],
                 materialSelectedName: "",
                 isNotHidePositionOther: false,
-                color: {
-                    r: 1,
-                    g: 1,
-                    b: 1
-                }, // màu mặc định khi đang design 
                 defaultColor: [] //màu mặc định khi init
             },
             methods: {
@@ -355,7 +364,10 @@
                         self.model = e.target;
                         self.listMaterials = self.model.model.materials;
 
-                        self.defaultColor = []; // màu mặc định của model (mảng obj {name,color})  
+                        self.defaultColor = self.model.model.materials.map(e => {
+                            return { name: e.name, color: [e.pbrMetallicRoughness.baseColorFactor[0], e.pbrMetallicRoughness.baseColorFactor[1], e.pbrMetallicRoughness.baseColorFactor[2]] }
+                        }); // màu mặc định của model (mảng obj {name,color})  
+
                         self.BackDefaultColor();
                     });
 
@@ -364,13 +376,11 @@
                 Select: function () {
                     var self = this;
 
-                    console.log(self.color)
-
                     if (!self.materialSelectedName || self.isNotHidePositionOther) {
                         //set tất cả material của model về màu chưa opacity
                         for (var m of self.listMaterials) {
                             m.setAlphaMode("OPAQUE");
-                            m.pbrMetallicRoughness.setBaseColorFactor([self.color.r, self.color.g, self.color.b, 1]);
+                            m.pbrMetallicRoughness.setBaseColorFactor([m.pbrMetallicRoughness.baseColorFactor[0], m.pbrMetallicRoughness.baseColorFactor[1], m.pbrMetallicRoughness.baseColorFactor[2], 1]);
                         }
                         return;
                     }
@@ -378,11 +388,11 @@
                     for (var m of self.listMaterials) {
                         if (m.name != self.materialSelectedName) {
                             m.setAlphaMode("BLEND");
-                            m.pbrMetallicRoughness.setBaseColorFactor([self.color.r, self.color.g, self.color.b, 0.05]);
+                            m.pbrMetallicRoughness.setBaseColorFactor([m.pbrMetallicRoughness.baseColorFactor[0], m.pbrMetallicRoughness.baseColorFactor[1], m.pbrMetallicRoughness.baseColorFactor[2], 0.05]);
                         }
                         else {
                             m.setAlphaMode("OPAQUE");
-                            m.pbrMetallicRoughness.setBaseColorFactor([self.color.r, self.color.g, self.color.b, 1]);
+                            m.pbrMetallicRoughness.setBaseColorFactor([m.pbrMetallicRoughness.baseColorFactor[0], m.pbrMetallicRoughness.baseColorFactor[1], m.pbrMetallicRoughness.baseColorFactor[2], 1]);
                         }
                     }
                 },
@@ -392,32 +402,12 @@
                         for (var obj of self.defaultColor) {
                             var mat = self.model.model.getMaterialByName(obj.name);
                             if (mat) {
-                                mat.setAlphaMode("OPAQUE");
-                                mat.pbrMetallicRoughness.setBaseColorFactor([obj.color.r, obj.color.g, obj.color.b, 1]);
+                                mat.pbrMetallicRoughness.setBaseColorFactor([obj.color[0], obj.color[1], obj.color[2], 1]);
                             }
-                        }
-                    }
-                    else {
-                        for (var m of self.listMaterials) {
-                            m.setAlphaMode("OPAQUE");
-                            m.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 1]);
                         }
                     }
 
                 },
-                SetColor: function (color) {
-                    var self = this;
-                    var c = hexToRgb(color);
-                    console.log(c)
-                    if (!c) {
-                        self.color = { r: 1, g: 1, b: 1 };
-                    }
-                    self.color.r = c.r / 255;
-                    self.color.g = c.g / 255;
-                    self.color.b = c.b / 255;
-
-                    console.log(self.color)
-                }
 
 
             },
@@ -459,7 +449,14 @@
                 },
                 UpdateColor: function () {
                     var self = this;
+                    // var c = hexToRgb(color);
+                    // if (!c) {
+                    //     self.color = { r: 1, g: 1, b: 1 };
+                    // }
+                    // //chuyển thành linear RGB
+                    // var linear = rgbToLinearRGB([c.r, c.g, c.b]);
 
+                    //gọi app select lấy meterial đang select để thay đổi màu
                     if (!appSelect.materialSelectedName) {
                         for (var m of self.model.model.materials) {
                             m.pbrMetallicRoughness.setBaseColorFactor(self.data.color);
@@ -469,9 +466,6 @@
                         var mat = self.model.model.getMaterialByName(appSelect.materialSelectedName);
                         mat.pbrMetallicRoughness.setBaseColorFactor(self.data.color);
                     }
-
-                    appSelect.SetColor(self.data.color);
-
 
                 },
                 ChangeImage: function (url) {
