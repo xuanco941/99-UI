@@ -97,9 +97,8 @@
 
             </div>
             <div class="col-12 col-md-6 col-xl-8 p-3" style="height: 100vh;">
-                <model-viewer id="model-main" class="w-100 h-100" alt=""
-                    src="./assets/model-glb/cresent_witch_clothes.glb" ar shadow-intensity="1" camera-controls
-                    disable-tap auto-rotate autoplay shadow-softness="0.1">
+                <model-viewer id="model-main" class="w-100 h-100" alt="" src="./assets/model-glb/maid_costume.glb" ar
+                    shadow-intensity="1" camera-controls disable-tap auto-rotate autoplay shadow-softness="0.1">
                 </model-viewer>
             </div>
             <div class="col-12 col-md-3 col-xl-2 mt-3 mt-md-0" style="height: 100%;cursor: default;">
@@ -240,6 +239,11 @@
         import { SearchImages } from './assets/js/search-image.js';
         // console.log(await SearchImages('cat', 10, 1));
         function hexToRgb(hex) {
+
+            if (!hex) {
+                return null;
+            }
+
             var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
             return result ? {
                 r: parseInt(result[1], 16),
@@ -340,7 +344,8 @@
                     r: 1,
                     g: 1,
                     b: 1
-                }
+                }, // màu mặc định khi đang design 
+                defaultColor: [] //màu mặc định khi init
             },
             methods: {
                 init: async function () {
@@ -349,16 +354,20 @@
                     document.getElementById("model-main").addEventListener('load', (e) => {
                         self.model = e.target;
                         self.listMaterials = self.model.model.materials;
-                        self.listMaterials[0].name = "Thân áo";
-                        self.listMaterials[1].name = "Khuy ôm bụng";
+
+                        self.defaultColor = []; // màu mặc định của model (mảng obj {name,color})  
+                        self.BackDefaultColor();
                     });
 
                     this.$forceUpdate();
                 },
                 Select: function () {
                     var self = this;
+
+                    console.log(self.color)
+
                     if (!self.materialSelectedName || self.isNotHidePositionOther) {
-                        //set tất cả material của model về màu mặc định
+                        //set tất cả material của model về màu chưa opacity
                         for (var m of self.listMaterials) {
                             m.setAlphaMode("OPAQUE");
                             m.pbrMetallicRoughness.setBaseColorFactor([self.color.r, self.color.g, self.color.b, 1]);
@@ -376,8 +385,38 @@
                             m.pbrMetallicRoughness.setBaseColorFactor([self.color.r, self.color.g, self.color.b, 1]);
                         }
                     }
+                },
+                BackDefaultColor: function () {
+                    var self = this;
+                    if (self.defaultColor && self.defaultColor.length > 0) {
+                        for (var obj of self.defaultColor) {
+                            var mat = self.model.model.getMaterialByName(obj.name);
+                            if (mat) {
+                                mat.setAlphaMode("OPAQUE");
+                                mat.pbrMetallicRoughness.setBaseColorFactor([obj.color.r, obj.color.g, obj.color.b, 1]);
+                            }
+                        }
+                    }
+                    else {
+                        for (var m of self.listMaterials) {
+                            m.setAlphaMode("OPAQUE");
+                            m.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 1]);
+                        }
+                    }
 
-                    console.log(self.materialSelectedName)
+                },
+                SetColor: function (color) {
+                    var self = this;
+                    var c = hexToRgb(color);
+                    console.log(c)
+                    if (!c) {
+                        self.color = { r: 1, g: 1, b: 1 };
+                    }
+                    self.color.r = c.r / 255;
+                    self.color.g = c.g / 255;
+                    self.color.b = c.b / 255;
+
+                    console.log(self.color)
                 }
 
 
@@ -394,11 +433,14 @@
                 querySearch: '',
                 listImages: [],
                 loadingImage: true,
+                model: {}
             },
             methods: {
                 init: async function () {
                     var self = this;
-
+                    document.getElementById("model-main").addEventListener('load', (e) => {
+                        self.model = e.target;
+                    });
                     this.data.imageTexture = "./assets/images/none.svg";
                     this.data.color = '';
 
@@ -416,26 +458,21 @@
                     self.loadingImage = false;
                 },
                 UpdateColor: function () {
-                    let color = hexToRgb(this.data.color);
-                    appSelect.color.r = color.r;
-                    appSelect.color.g = color.g;
-                    appSelect.color.b = color.b;
-
-
+                    var self = this;
 
                     if (!appSelect.materialSelectedName) {
-                        for (var m of appSelect.listMaterials) {
-                            m.pbrMetallicRoughness.setBaseColorFactor(this.data.color);
+                        for (var m of self.model.model.materials) {
+                            m.pbrMetallicRoughness.setBaseColorFactor(self.data.color);
                         }
                     }
                     else {
-                        var mat = appSelect.listMaterials.find(e => e.name == appSelect.materialSelectedName);
-                        mat.pbrMetallicRoughness.setBaseColorFactor(this.data.color);
+                        var mat = self.model.model.getMaterialByName(appSelect.materialSelectedName);
+                        mat.pbrMetallicRoughness.setBaseColorFactor(self.data.color);
                     }
-                    
-                    console.log(this.data.color)
-                    console.log(appSelect.color)
-                    console.log(appSelect.model.model)
+
+                    appSelect.SetColor(self.data.color);
+
+
                 },
                 ChangeImage: function (url) {
                     this.data.imageTexture = url;
