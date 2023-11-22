@@ -27,22 +27,34 @@
 <body class="bg-color text-white">
     <div class="container-fluid">
         <div class="row gx-2">
-            <div class="col-12 col-md-3 col-xl-2 mb-3 mb-md-0" style="height: 100%; cursor: default;">
-                <div id="appSelectModel" class="h-4">
-                    <h6 class="text-center mb-3 mt-2" style="color: #ccc; height: 30px;">MODEL</h6>
-                    <div class="row g-1" style="font-size: 16px;overflow-y: auto;max-height: 400px;">
+            <div class="col-12 col-md-3 col-xl-2 mb-3 mb-md-0" style="height: 100vh; cursor: default;">
+                <div id="appSelectModel" style="height: calc(50% - 16px); padding-bottom: 8px;">
+                    <h6 class="text-center my-2" style="color: #ccc; height: 30px;">MODEL</h6>
+                    <div class="row g-1 pb-1" style="font-size: 16px;overflow-y: auto;max-height: calc(100% - 30px);">
                         <div class="col-4 col-md-6 product">
                             <img class="mw-100 mh-100" src="./assets/images/products/1.webp" alt="" srcset="">
                         </div>
                         <div class="col-4 col-md-6 product">
                             <img class="mw-100 mh-100" src="./assets/images/products/2.webp" alt="" srcset="">
                         </div>
+                        <div class="col-4 col-md-6 product">
+                            <img class="mw-100 mh-100" src="./assets/images/products/2.webp" alt="" srcset="">
+                        </div>
+                        <div class="col-4 col-md-6 product">
+                            <img class="mw-100 mh-100" src="./assets/images/products/2.webp" alt="" srcset="">
+                        </div>
+                        <div class="col-4 col-md-6 product">
+                            <img class="mw-100 mh-100" src="./assets/images/products/2.webp" alt="" srcset="">
+                        </div>
+                        <div class="col-4 col-md-6 product">
+                            <img class="mw-100 mh-100" src="./assets/images/products/2.webp" alt="" srcset="">
+                        </div>
                     </div>
                 </div>
-                <div class="border-top my-3"></div>
-                <div id="appBackground" class="h-47">
-                    <div style="height: 80px;">
-                        <h6 class="text-center mb-2 mt-2" style="color: #ccc;">BACKGROUND</h6>
+                <div class="border-top my-2"></div>
+                <div id="appBackground" style="height: calc(50% - 16px); padding-bottom: 8px;">
+                    <div style="height: 70px;">
+                        <h6 class="text-center my-2" style="color: #ccc;">BACKGROUND</h6>
                         <ul class="nav nav-pills mb-2 d-flex justify-content-between" id="pills-tab" role="tablist">
                             <li class="nav-item" style="width: 48%;" role="presentation">
                                 <button style="font-size: 11px; letter-spacing: 1px;"
@@ -58,8 +70,8 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="tab-content h-75 mh-75" id="pills-tabContent"
-                        style="overflow-y: auto; max-height: 400px;">
+                    <div class="tab-content" id="pills-tabContent"
+                        style="overflow-y: auto;max-height: calc(100% - 70px);">
                         <div class="tab-pane fade show active" id="pills-background-image" role="tabpanel">
                             <div class="form-check form-switch d-flex align-items-center justify-content-start p-0">
                                 <input class="form-check-input mt-0 mx-0" type="checkbox" v-model="typeImage"
@@ -94,7 +106,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="col-12 col-md-6 col-xl-8 p-3" style="height: 100vh;">
                 <model-viewer id="model-main" class="w-100 h-100" alt=""
@@ -102,128 +113,154 @@
                     disable-tap auto-rotate autoplay shadow-softness="0.1">
                 </model-viewer>
             </div>
-            <div class="col-12 col-md-3 col-xl-2 mt-3 mt-md-0" style="height: 100%;cursor: default;">
-                <div class="h-100" style="z-index: 2; opacity: 0.8;">
-                    <nav>
-                        <div class="nav nav-tabs justify-content-between" id="nav-tab" role="tablist"
-                            style="font-size: 0.9rem;">
-                            <button class="nav-link active" id="nav-design-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-design" type="button" role="tab" aria-controls="nav-design"
-                                aria-selected="true">Thiết kế</button>
-                            <button class="nav-link" id="nav-share-tab" data-bs-toggle="tab" data-bs-target="#nav-share"
-                                type="button" role="tab" aria-controls="nav-share" aria-selected="false">Chia
-                                sẻ</button>
-                            <button class="nav-link" id="nav-download-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-download" type="button" role="tab" aria-controls="nav-download"
-                                aria-selected="false">Tải về</button>
-                        </div>
-                    </nav>
-                    <div class="tab-content mt-3" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-design" role="tabpanel"
-                            aria-labelledby="nav-design-tab">
-
-                            <div class="flex-shrink-0 py-3 px-0 w-100" style="height: 750px; overflow-y: auto;">
-                                <div id="app-select-position-model">
-                                    <label for="selectPositionModel" class="form-label" style="font-size: 0.9rem;">Chọn
-                                        bộ phận thao tác:</label>
-                                    <select id="selectPositionModel" class="form-select" v-model="materialSelectedName"
-                                        v-on:change="Select()">
-                                        <option value="">Toàn bộ phận</option>
-                                        <option v-for="mat in listMaterials" v-bind:value="mat.name">{{mat.name}}
-                                        </option>
-                                    </select>
-                                    <div
-                                        class="form-check form-switch d-flex align-items-center justify-content-end p-0 mt-1">
-                                        <input class="form-check-input mt-0 mx-0" type="checkbox"
-                                            v-model="isNotHidePositionOther" id="hideOther" v-on:change="Select()">
-                                        <label class="form-check-label mx-1" for="hideOther"
-                                            style="font-size: 10px;">Không ẩn bộ phận khác</label>
-                                    </div>
-                                </div>
-                                <ul class="list-unstyled ps-0 mt-4">
-                                    <li class="mb-3" id="select-color">
-                                        <button class="btn btn-toggle align-items-center rounded collapsed"
-                                            data-bs-toggle="collapse" data-bs-target="#color-collapse"
-                                            aria-expanded="true">
-                                            Màu sắc
-                                        </button>
-                                        <div class="collapse show mt-2" id="color-collapse"
-                                            style="margin-left: 1.5rem; max-height: 300px; overflow-y: auto;">
-                                            <div class="d-flex align-items-center">
-                                                <input v-model="data.color" v-on:input="UpdateColor()" type="color"
-                                                    class="form-control form-control-color w-25 product"
-                                                    id="colorDesignInput">
-                                                <label class="mx-2" style="font-size: 0.9rem;">Đơn màu</label>
-                                            </div>
-                                            <div class="border-top my-3"></div>
-                                            <div>
-                                                <div class="d-flex align-items-center">
-                                                    <input hidden type="file" id="uploadImgColor" accept="image/*"
-                                                        v-on:change="GetUrlFileUpload">
-                                                    <label for="uploadImgColor" class="w-25" role="button">
-                                                        <img v-bind:src="data.imageTexture" class="w-100 product"
-                                                            style="border-radius: 5px;">
-                                                    </label>
-                                                    <label class="mx-2" style="font-size: 0.9rem;">Kết cấu màu từ
-                                                        ảnh</label>
-                                                </div>
-
-                                                <div class="mt-3">
-                                                    <div class="input-group input-group-sm mb-1">
-                                                        <input style="box-shadow: none;" type="text"
-                                                            class="form-control form-control-sm"
-                                                            placeholder="Tìm kiếm hình ảnh"
-                                                            aria-describedby="button-search-image-bg"
-                                                            v-model="querySearch" v-on:keyup.enter="SearchImages()">
-                                                        <button class="btn btn-outline-primary" type="button"
-                                                            id="button-search-image-bg" v-on:click="SearchImages()">
-                                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="row mt-2 w-100 justify-content-center mx-0">
-                                                        <div v-if="loadingImage"
-                                                            class="d-flex justify-content-center align-items-center w-100"
-                                                            style="height: 100px;">
-                                                            <div class="spinner-border" role="status">
-                                                                <span class="visually-hidden">Loading...</span>
-                                                            </div>
-                                                        </div>
-                                                        <img v-if="!loadingImage" style="max-width: 100%;"
-                                                            class="col-4 px-1 py-1 product"
-                                                            v-for="(url,index) in listImages" v-bind:src="url"
-                                                            v-bind:alt="index" v-on:click="ChangeImage(url)">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-3">
-                                        <button class="btn btn-toggle align-items-center rounded collapsed"
-                                            data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
-                                            aria-expanded="false">
-                                            Dashboard
-                                        </button>
-                                        <div class="collapse" id="dashboard-collapse" style="margin-left: 1.5rem;">
-                                        </div>
-                                    </li>
-                                    <li class="mb-3">
-                                        <button class="btn btn-toggle align-items-center rounded collapsed"
-                                            data-bs-toggle="collapse" data-bs-target="#orders-collapse"
-                                            aria-expanded="false">
-                                            Orders
-                                        </button>
-                                        <div class="collapse" id="orders-collapse" style="margin-left: 1.5rem;">
-                                            <span>abc</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="nav-share" role="tabpanel" aria-labelledby="nav-share-tab">...
-                        </div>
-                        <div class="tab-pane fade" id="nav-download" role="tabpanel" aria-labelledby="nav-download-tab">
-                            ...</div>
+            <div class="col-12 col-md-3 col-xl-2 mt-3 mt-md-0" style="height: 100vh; max-height: 100vh; cursor: default; overflow-y: auto;">
+                <nav class="mb-2" style="height: 36px;">
+                    <div class="nav nav-tabs justify-content-between h-100 flex-nowrap" id="nav-tab" role="tablist"
+                        style="font-size: 0.7rem; font-weight: 500; color: #149CEA;">
+                        <button class="nav-link active" id="nav-design-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-design" type="button" role="tab" aria-controls="nav-design"
+                            aria-selected="true" style="width: 32%;">Thiết kế</button>
+                        <button class="nav-link" id="nav-share-tab" data-bs-toggle="tab" data-bs-target="#nav-share"
+                            type="button" role="tab" aria-controls="nav-share" aria-selected="false" style="width: 32%;">Chia
+                            sẻ</button>
+                        <button class="nav-link" id="nav-download-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-download" type="button" role="tab" aria-controls="nav-download"
+                            aria-selected="false" style="width: 32%;">Tải về</button>
                     </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent" style="max-height: calc(100% - 36px);">
+                    <div class="tab-pane fade show active" id="nav-design" role="tabpanel" aria-labelledby="nav-design-tab">
+
+                        <div class="flex-shrink-0 w-100">
+                            <div id="app-select-position-model">
+                                <label for="selectPositionModel" class="form-label" style="font-size: 0.9rem;">Chọn
+                                    bộ phận thao tác:</label>
+                                <select id="selectPositionModel" class="form-select" v-model="materialSelectedName"
+                                    v-on:change="Select()">
+                                    <option value="">Toàn bộ phận</option>
+                                    <option v-for="mat in listMaterials" v-bind:value="mat.name">{{mat.name}}
+                                    </option>
+                                </select>
+                                <div
+                                    class="form-check form-switch d-flex align-items-center justify-content-end p-0 mt-1">
+                                    <input class="form-check-input mt-0 mx-0" type="checkbox"
+                                        v-model="isNotHidePositionOther" id="hideOther" v-on:change="Select()">
+                                    <label class="form-check-label mx-1" for="hideOther" style="font-size: 10px;">Không
+                                        ẩn bộ phận khác</label>
+                                </div>
+                            </div>
+                            <ul class="list-unstyled ps-0 mt-4">
+                                <li class="mb-3" id="change-baseColorFactor">
+                                    <button class="btn btn-toggle align-items-center rounded collapsed"
+                                        data-bs-toggle="collapse" data-bs-target="#color-collapse" aria-expanded="true">
+                                        Màu sắc
+                                    </button>
+                                    <div class="collapse show mt-2" id="color-collapse"
+                                        style="padding-left: 1.5rem; max-height: 300px; overflow-y: auto; overflow-x: hidden;">
+                                        <div class="d-flex align-items-center">
+                                            <input v-model="data.color" v-on:input="ChangeColor()" type="color"
+                                                class="form-control form-control-color w-25 product"
+                                                id="colorDesignInput">
+                                            <label class="mx-2" style="font-size: 0.9rem;">Đơn màu</label>
+                                        </div>
+                                        <div class="border-top my-3"></div>
+                                        <div>
+                                            <div class="d-flex align-items-center">
+                                                <input hidden type="file" id="uploadImgColor" accept="image/*"
+                                                    v-on:change="GetUrlFileUpload">
+                                                <label for="uploadImgColor" class="w-25" role="button">
+                                                    <img v-bind:src="data.imageTexture" class="w-100 product"
+                                                        style="border-radius: 5px;">
+                                                </label>
+                                                <label class="mx-2" style="font-size: 0.9rem;">
+                                                    Kết cấu màu từ ảnh
+                                                </label>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-6">
+                                                    <label for="rotationIp" class="form-label m-0"
+                                                        style="font-size: 14px;">Rotation</label>
+                                                    <div class="position-relative" style="padding-right: 5px;">
+                                                        <span class="position-absolute"
+                                                            style="font-size: 12px; bottom: -9px; left: 0px;">0</span>
+                                                        <input v-on:change="ChangeRotationTexture()"
+                                                            v-model="data.rotationTexture" type="range"
+                                                            class="form-range" min="0" max="3.14" step="0.01"
+                                                            id="rotationIp">
+                                                        <span class="position-absolute"
+                                                            style="font-size: 12px; bottom: -9px; right: 5px;">3.14</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="scaleIp" class="form-label m-0"
+                                                        style="font-size: 14px;">Scale</label>
+                                                    <div class="position-relative" style="padding-right: 5px;">
+                                                        <span class="position-absolute"
+                                                            style="font-size: 12px; bottom: -9px; left: 0px;">0</span>
+                                                        <input v-on:change="ChangeScaleTexture()"
+                                                            v-model="data.scaleTexture" type="range" class="form-range"
+                                                            min="0" max="2" step="0.01" id="scaleIp">
+                                                        <span class="position-absolute"
+                                                            style="font-size: 12px; bottom: -9px; right: 5px;">2</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-4">
+                                                <div class="input-group input-group-sm mb-1">
+                                                    <input style="box-shadow: none;" type="text"
+                                                        class="form-control form-control-sm"
+                                                        placeholder="Tìm kiếm hình ảnh"
+                                                        aria-describedby="button-search-image-bg" v-model="querySearch"
+                                                        v-on:keyup.enter="SearchImages()">
+                                                    <button class="btn btn-outline-primary" type="button"
+                                                        id="button-search-image-bg" v-on:click="SearchImages()">
+                                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="row mt-2 w-100 justify-content-center mx-0">
+                                                    <div v-if="loadingImage"
+                                                        class="d-flex justify-content-center align-items-center w-100"
+                                                        style="height: 100px;">
+                                                        <div class="spinner-border" role="status">
+                                                            <span class="visually-hidden">Loading...</span>
+                                                        </div>
+                                                    </div>
+                                                    <img v-if="!loadingImage" style="max-width: 100%;"
+                                                        class="col-4 px-1 py-1 product"
+                                                        v-for="(url,index) in listImages" v-bind:src="url"
+                                                        v-bind:alt="index" v-on:click="ChangeTexture(url)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mb-3">
+                                    <button class="btn btn-toggle align-items-center rounded collapsed"
+                                        data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
+                                        aria-expanded="false">
+                                        Dashboard
+                                    </button>
+                                    <div class="collapse" id="dashboard-collapse" style="margin-left: 1.5rem;">
+                                    </div>
+                                </li>
+                                <li class="mb-3">
+                                    <button class="btn btn-toggle align-items-center rounded collapsed"
+                                        data-bs-toggle="collapse" data-bs-target="#orders-collapse"
+                                        aria-expanded="false">
+                                        Orders
+                                    </button>
+                                    <div class="collapse" id="orders-collapse" style="margin-left: 1.5rem;">
+                                        <span>abc</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-share" role="tabpanel" aria-labelledby="nav-share-tab">...
+                    </div>
+                    <div class="tab-pane fade" id="nav-download" role="tabpanel" aria-labelledby="nav-download-tab">
+                        ...</div>
                 </div>
             </div>
         </div>
@@ -239,6 +276,8 @@
 
         import { SearchImages } from './assets/js/search-image.js';
         // console.log(await SearchImages('cat', 10, 1));
+
+
         function hexToRgb(hex) {
 
             if (!hex) {
@@ -267,6 +306,10 @@
 
             return { r: linearized[0], g: linearized[1], b: linearized[2] };
         }
+
+
+
+
         var appBackground = new Vue({
             el: "#appBackground",
             data: {
@@ -354,7 +397,6 @@
                 listMaterials: [],
                 materialSelectedName: "",
                 isNotHidePositionOther: false,
-                defaultColor: [] //màu mặc định khi init
             },
             methods: {
                 init: async function () {
@@ -362,13 +404,7 @@
 
                     document.getElementById("model-main").addEventListener('load', (e) => {
                         self.model = e.target;
-                        self.listMaterials = self.model.model.materials;
-
-                        self.defaultColor = self.model.model.materials.map(e => {
-                            return { name: e.name, color: [e.pbrMetallicRoughness.baseColorFactor[0], e.pbrMetallicRoughness.baseColorFactor[1], e.pbrMetallicRoughness.baseColorFactor[2]] }
-                        }); // màu mặc định của model (mảng obj {name,color})  
-
-                        self.BackDefaultColor();
+                        self.listMaterials = e.target.model.materials;
                     });
 
                     this.$forceUpdate();
@@ -396,43 +432,42 @@
                         }
                     }
                 },
-                BackDefaultColor: function () {
+                GetMaterialsSelected: function () {
                     var self = this;
-                    if (self.defaultColor && self.defaultColor.length > 0) {
-                        for (var obj of self.defaultColor) {
-                            var mat = self.model.model.getMaterialByName(obj.name);
-                            if (mat) {
-                                mat.pbrMetallicRoughness.setBaseColorFactor([obj.color[0], obj.color[1], obj.color[2], 1]);
-                            }
-                        }
+                    if (self.materialSelectedName) {
+                        return self.listMaterials.filter(e => e.name == self.materialSelectedName);
                     }
-
-                },
-
-
+                    else {
+                        return self.listMaterials;
+                    }
+                }
             },
             mounted() {
                 this.init();
             },
         });
 
-        var appSelectColor = new Vue({
-            el: "#select-color",
+        var appChangeColor = new Vue({
+            el: "#change-baseColorFactor",
             data: {
                 data: {},
                 querySearch: '',
                 listImages: [],
                 loadingImage: true,
-                model: {}
+                model: {},
+                modelViewer: {}
             },
             methods: {
                 init: async function () {
                     var self = this;
-                    document.getElementById("model-main").addEventListener('load', (e) => {
+                    self.modelViewer = document.getElementById("model-main");
+                    self.modelViewer.addEventListener('load', (e) => {
                         self.model = e.target;
                     });
                     this.data.imageTexture = "./assets/images/none.svg";
-                    this.data.color = '';
+                    this.data.color = '#010101';
+                    this.data.rotationTexture = 0;
+                    this.data.scaleTexture = 1;
 
                     await this.SearchImages();
 
@@ -447,7 +482,7 @@
                     }
                     self.loadingImage = false;
                 },
-                UpdateColor: function () {
+                ChangeColor: function () {
                     var self = this;
                     // var c = hexToRgb(color);
                     // if (!c) {
@@ -457,32 +492,42 @@
                     // var linear = rgbToLinearRGB([c.r, c.g, c.b]);
 
                     //gọi app select lấy meterial đang select để thay đổi màu
-                    if (!appSelect.materialSelectedName) {
-                        for (var m of self.model.model.materials) {
-                            m.pbrMetallicRoughness.setBaseColorFactor(self.data.color);
-                        }
-                    }
-                    else {
-                        var mat = self.model.model.getMaterialByName(appSelect.materialSelectedName);
-                        mat.pbrMetallicRoughness.setBaseColorFactor(self.data.color);
+                    for (var m of appSelect.GetMaterialsSelected()) {
+                        m.pbrMetallicRoughness.setBaseColorFactor(self.data.color);
                     }
 
                 },
-                ChangeImage: function (url) {
-                    this.data.imageTexture = url;
-                    console.log(this.data.imageTexture);
+                ChangeTexture: async function (url) {
+                    var self = this;
+                    self.data.imageTexture = url;
+                    const texture = await self.modelViewer.createTexture(url);
+                    for (var m of appSelect.GetMaterialsSelected()) {
+                        m.pbrMetallicRoughness['baseColorTexture'].setTexture(texture);
+                    }
                     this.$forceUpdate();
-
                 },
-                GetUrlFileUpload: function (e) {
+                GetUrlFileUpload: async function (e) {
                     var self = this;
                     let file = e.target.files[0];
+                    //check file ảnh tải lên
                     if (file && file['type'].split('/')[0] === 'image') {
                         let url = URL.createObjectURL(file);
-                        self.ChangeImage(url);
+                        await self.ChangeTexture(url);
+                    }
+                },
+                ChangeRotationTexture: function () {
+                    var rotation = this.data.rotationTexture;
+                    console.log(rotation);
+                    for (var m of appSelect.GetMaterialsSelected()) {
+                        m.pbrMetallicRoughness['baseColorTexture'].texture.sampler.setRotation(rotation);
+                    }
+                },
+                ChangeScaleTexture: function () {
+                    var scale = { u: this.data.scaleTexture, v: this.data.scaleTexture };
+                    for (var m of appSelect.GetMaterialsSelected()) {
+                        m.pbrMetallicRoughness['baseColorTexture'].texture.sampler.setScale(scale);
                     }
                 }
-
 
             },
             mounted() {
