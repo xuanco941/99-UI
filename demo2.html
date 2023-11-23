@@ -18,16 +18,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
-
-
     <link rel="stylesheet" href="./assets/css/demo2.css">
 </head>
 
 <body class="bg-color text-white">
     <div class="container-fluid">
         <div class="row gx-2">
-            <div class="col-12 col-md-3 col-xl-2 mb-3 mb-md-0" style="height: 100vh; cursor: default;">
+            <div class="col-12 col-md-3 col-lg-2 col-xl-2 mb-3 mb-md-0" style="height: 100vh; cursor: default;">
                 <div id="appSelectModel" style="height: calc(50% - 16px); padding-bottom: 8px;">
                     <h6 class="text-center my-2" style="color: #ccc; height: 30px;">MODEL</h6>
                     <div class="row g-1 pb-1" style="font-size: 16px;overflow-y: auto;max-height: calc(100% - 30px);">
@@ -107,13 +104,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-xl-8 p-3" style="height: 100vh;">
+            <div class="col-12 col-md-5 col-lg-7 col-xl-8 p-3" style="height: 100vh;">
                 <model-viewer id="model-main" class="w-100 h-100" alt=""
                     src="./assets/model-glb/cresent_witch_clothes.glb" ar shadow-intensity="1" camera-controls
                     disable-tap auto-rotate autoplay shadow-softness="0.1">
                 </model-viewer>
             </div>
-            <div class="col-12 col-md-3 col-xl-2 mt-3 mt-md-0"
+            <div class="col-12 col-md-4 col-lg-3 col-xl-2 mt-3 mt-md-0"
                 style="height: 100vh; max-height: 100vh; cursor: default; overflow-y: auto;">
                 <nav class="mb-2" style="height: 36px;">
                     <div class="nav nav-tabs justify-content-between h-100 flex-nowrap" id="nav-tab" role="tablist"
@@ -155,10 +152,11 @@
                             <ul class="list-unstyled ps-0 mt-4">
                                 <li class="mb-3" id="appChangeColor">
                                     <button class="btn btn-toggle align-items-center rounded collapsed"
-                                        data-bs-toggle="collapse" data-bs-target="#color-collapse" aria-expanded="true">
+                                        data-bs-toggle="collapse" data-bs-target="#color-collapse"
+                                        aria-expanded="false">
                                         Màu sắc
                                     </button>
-                                    <div class="collapse show mt-2" id="color-collapse"
+                                    <div class="collapse mt-2" id="color-collapse"
                                         style="padding-left: 1.5rem; max-height: 500px; overflow-y: auto; overflow-x: hidden;">
                                         <div class="d-flex align-items-center">
                                             <input v-model="data.color" v-on:input="ChangeColor()" type="color"
@@ -183,14 +181,18 @@
                                                 <div class="col-6">
                                                     <label for="rotationIp" class="form-label m-0"
                                                         style="font-size: 14px;">Rotation</label>
-                                                    <div class="position-relative d-flex flex-nowrap align-items-center" style="padding-right: 5px;">
+                                                    <div class="position-relative d-flex flex-nowrap align-items-center"
+                                                        style="padding-right: 5px;">
                                                         <span class="position-absolute"
                                                             style="font-size: 10px; bottom: -9px; left: 0px;">0</span>
                                                         <input v-on:change="ChangeRotationTexture()"
                                                             v-model="data.rotationTexture" type="range"
                                                             class="form-range" min="0" max="3.14" step="0.01"
                                                             id="rotationIp">
-                                                            <input class="from-control form-control-sm text-center" disabled readonly style="width: 27px; font-size: 10px; margin-left: 3px;color: #fff; padding: 1px;" type="text" v-bind:value="data.rotationTexture">
+                                                        <input class="from-control form-control-sm text-center" disabled
+                                                            readonly
+                                                            style="width: 27px; font-size: 10px; margin-left: 3px;color: #fff; padding: 1px;"
+                                                            type="text" v-bind:value="data.rotationTexture">
                                                         <span class="position-absolute"
                                                             style="font-size: 10px; bottom: -9px; right: 33px;">3.14</span>
                                                     </div>
@@ -198,13 +200,17 @@
                                                 <div class="col-6">
                                                     <label for="scaleIp" class="form-label m-0"
                                                         style="font-size: 14px;">Scale</label>
-                                                    <div class="position-relative d-flex flex-nowrap align-items-center" style="padding-right: 5px;">
+                                                    <div class="position-relative d-flex flex-nowrap align-items-center"
+                                                        style="padding-right: 5px;">
                                                         <span class="position-absolute"
                                                             style="font-size: 12px; bottom: -9px; left: 0px;">0</span>
                                                         <input v-on:change="ChangeScaleTexture()"
                                                             v-model="data.scaleTexture" type="range" class="form-range"
                                                             min="0" max="2" step="0.1" id="scaleIp">
-                                                            <input class="from-control form-control-sm text-center" disabled readonly style="width: 27px; font-size: 10px; margin-left: 3px;color: #fff; padding: 1px;" type="text" v-bind:value="data.scaleTexture">
+                                                        <input class="from-control form-control-sm text-center" disabled
+                                                            readonly
+                                                            style="width: 27px; font-size: 10px; margin-left: 3px;color: #fff; padding: 1px;"
+                                                            type="text" v-bind:value="data.scaleTexture">
                                                         <span class="position-absolute"
                                                             style="font-size: 12px; bottom: -9px; right: 33px;">2</span>
                                                     </div>
@@ -243,46 +249,54 @@
                                 <li class="mb-3" id="appChangeMetallicRoughness">
                                     <button class="btn btn-toggle align-items-center rounded collapsed"
                                         data-bs-toggle="collapse" data-bs-target="#metallic-roughness-collapse"
-                                        aria-expanded="false">
+                                        aria-expanded="true">
                                         Chất liệu
                                     </button>
-                                    <div class="collapse" id="metallic-roughness-collapse" style="margin-left: 1.5rem;">
+                                    <div class="collapse show" id="metallic-roughness-collapse"
+                                        style="margin-left: 1.5rem;">
 
-                                        <div class="radio-button-container">
+                                        <div v-if="loading" class="spinner-border" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <div v-if="!loading" class="radio-button-container">
                                             <div class="radio-button">
-                                                <input type="radio" class="radio-button__input" v-on:change="changeMetallicRoughness(null)" v-model="textureMetallicRoughness" value="" id="radio-change-r-default" name="radio-change-metallic-roughness">
+                                                <input type="radio" class="radio-button__input"
+                                                    v-on:change="changeMetallicRoughness(null)" value=""
+                                                    id="radio-change-r-default" name="radio-change-metallic-roughness">
                                                 <label class="radio-button__label" for="radio-change-r-default">
                                                     <span class="radio-button__custom"></span>
                                                     <span>
-                                                        <span>default</span>
+                                                        <span>Mặc định</span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div v-for="item in listMetallicRoughness"
+                                                class="radio-button d-flex align-items-center">
+                                                <input type="radio" class="radio-button__input"
+                                                    v-on:change="changeMetallicRoughness(item.url)"
+                                                    v-bind:id="item.name" name="radio-change-metallic-roughness">
+                                                <label class="radio-button__label" v-bind:for="item.name">
+                                                    <span class="radio-button__custom" style="top: 9px;"></span>
+                                                    <span class="d-flex align-items-center">
+                                                        <span class="mx-1">{{item.name}}</span>
+                                                        <img style="width: 30px; height: 30px;" v-bind:src="item.url"
+                                                            v-bind:alt="item.name">
                                                     </span>
                                                 </label>
                                             </div>
 
-                                            <div class="radio-button d-flex align-items-center" v-for="item in listMetallicRoughness">
-                                                <input type="radio" class="radio-button__input" v-on:change="changeMetallicRoughness(item.url)" v-model="textureMetallicRoughness" v-bind:id="item.name" name="radio-change-metallic-roughness">
-                                                <label class="radio-button__label" v-bind:for="item.name">
-                                                    <span class="radio-button__custom" style="bottom: 0px;"></span>
-                                                    <span class="d-flex align-items-center">
-                                                        <img style="width: 30px; height: 30px;" v-bind:src="item.url" alt="">
-                                                        <span>{{item.name}}</span>
-                                                    </span>
-                                                </label>
-                                            </div>
-                                            
-                                            
                                         </div>
 
-                                        
+
                                     </div>
                                 </li>
-                                <li class="mb-3">
+                                <li class="mb-3" id="appChangeDecal">
                                     <button class="btn btn-toggle align-items-center rounded collapsed"
-                                        data-bs-toggle="collapse" data-bs-target="#orders-collapse"
+                                        data-bs-toggle="collapse" data-bs-target="#decal-collapse"
                                         aria-expanded="false">
-                                        Orders
+                                        Dán decal
                                     </button>
-                                    <div class="collapse" id="orders-collapse" style="margin-left: 1.5rem;">
+                                    <div class="collapse" id="decal-collapse" style="margin-left: 1.5rem;">
                                         <span>abc</span>
                                     </div>
                                 </li>
@@ -303,6 +317,16 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <!--vue2 production-->
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
+
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@^0.158.0/build/three.module.js",
+            "three/addons/geometries/DecalGeometry.js": "https://unpkg.com/three@^0.158.0/examples/jsm/geometries/DecalGeometry.js"
+          }
+        }
+    </script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
 
     <script type="module">
 
@@ -570,9 +594,9 @@
             el: "#appChangeMetallicRoughness",
             data: {
                 model: {},
-                modelViewer:{},
+                modelViewer: {},
                 listMetallicRoughness: [],
-                textureMetallicRoughness: ''
+                loading: true
             },
             methods: {
                 init: async function () {
@@ -587,18 +611,76 @@
 
                     this.$forceUpdate();
                 },
-                getListMetallicRoughness: async function(){
-                    var textures = {name: 'jean', url: './assets/textures/jean.jpg'};
-                    this.listMetallicRoughness.push(textures);
+                getListMetallicRoughness: async function () {
+                    var self = this;
+                    self.loading = true;
+                    var textures1 = { name: 'jean', url: 'assets/textures/jean.jpg' };
+                    var textures2 = { name: 'coarse', url: 'assets/textures/coarse-old-fabric_albedo.png' };
+
+                    this.listMetallicRoughness.push(textures1, textures2);
+                    self.loading = false;
+
                 },
-                changeMetallicRoughness: async function(url){
-                    if(url){
-                        console.log(this.modelViewer)
-                        // const texture = await self.modelViewer.createTexture(url);
-                        console.log(url);
+                changeMetallicRoughness: async function (url) {
+                    var self = this;
+                    if (url) {
+                        const texture = await self.modelViewer.createTexture(url);
+                        for (var m of appSelect.GetMaterialsSelected()) {
+                            m.pbrMetallicRoughness['metallicRoughnessTexture'].setTexture(texture);
+                        }
+                    }
+                    else {
+                        //url không tồn tại thì chuyển về chất liệu mặc định
+                        for (var m of appSelect.GetMaterialsSelected()) {
+                            m.pbrMetallicRoughness['metallicRoughnessTexture'].setTexture(null);
+                        }
                     }
 
                 }
+
+            },
+            mounted() {
+                this.init();
+            },
+        });
+
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { DecalGeometry } from 'three/addons/geometries/DecalGeometry.js';
+
+
+        var modelViewer = document.getElementById('model-main');
+        modelViewer.addEventListener('load', (elm) => {
+            var scene = elm.target[Object.getOwnPropertySymbols(elm.target).find(e => e.description === 'scene')];
+
+            modelViewer.addEventListener('click', (event) => {
+                const vals = modelViewer.positionAndNormalFromPoint(event.clientX, event.clientY);
+            })
+        })
+
+
+
+        var appChangeDecal = new Vue({
+            el: "#appChangeDecal",
+            data: {
+                model: {},
+                modelViewer: {},
+            },
+            methods: {
+                init: async function () {
+                    var self = this;
+                    self.modelViewer = document.getElementById("model-main");
+                    self.modelViewer.addEventListener('load', (e) => {
+                        self.model = e.target;
+                    });
+
+
+
+
+                    this.$forceUpdate();
+                },
+
 
             },
             mounted() {
