@@ -654,7 +654,7 @@
         const textureLoader = new THREE.TextureLoader();
         const decalDiffuse = textureLoader.load('./assets/images/bg_2.png');
         decalDiffuse.colorSpace = THREE.SRGBColorSpace;
-        const decalNormal = textureLoader.load('./assets/images/bg_2.png');
+        const decalNormal = textureLoader.load('./assets/images/bg_1.png');
 
         const decalMaterial = new THREE.MeshPhongMaterial({
             specular: 0x444444,
@@ -676,125 +676,10 @@
         modelViewer.addEventListener('load', (elm) => {
             var scene = elm.target[Object.getOwnPropertySymbols(elm.target).find(e => e.description === 'scene')];
 
-            const intersection = {
-                intersects: false,
-                point: new THREE.Vector3(),
-                normal: new THREE.Vector3()
-            };
-            const mouse = new THREE.Vector2();
-            const intersects = [];
-
-            const decals = [];
-            let mouseHelper;
-            const position = new THREE.Vector3();
-            const orientation = new THREE.Euler();
-            const size = new THREE.Vector3(10, 10, 10);
-            const params = {
-                minScale: 10,
-                maxScale: 20,
-                rotate: true,
-                clear: function () {
-
-                    removeDecals();
-
-                }
-            };
-
-            const geometry = new THREE.BufferGeometry();
-            geometry.setFromPoints([new THREE.Vector3(), new THREE.Vector3()]);
-
-            line = new THREE.Line(geometry, new THREE.LineBasicMaterial());
-            scene.add(line);
-            raycaster = new THREE.Raycaster();
-
-            mouseHelper = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 10), new THREE.MeshNormalMaterial());
-            mouseHelper.visible = false;
-            scene.add(mouseHelper);
-
-
-
-            function checkIntersection(x, y) {
-
-                if (mesh === undefined) return;
-
-                mouse.x = (x / window.innerWidth) * 2 - 1;
-                mouse.y = - (y / window.innerHeight) * 2 + 1;
-
-                raycaster.setFromCamera(mouse, camera);
-                raycaster.intersectObject(mesh, false, intersects);
-
-                if (intersects.length > 0) {
-
-                    const p = intersects[0].point;
-                    mouseHelper.position.copy(p);
-                    intersection.point.copy(p);
-
-                    const n = intersects[0].face.normal.clone();
-                    n.transformDirection(mesh.matrixWorld);
-                    n.multiplyScalar(10);
-                    n.add(intersects[0].point);
-
-                    intersection.normal.copy(intersects[0].face.normal);
-                    mouseHelper.lookAt(n);
-
-                    const positions = line.geometry.attributes.position;
-                    positions.setXYZ(0, p.x, p.y, p.z);
-                    positions.setXYZ(1, n.x, n.y, n.z);
-                    positions.needsUpdate = true;
-
-                    intersection.intersects = true;
-
-                    intersects.length = 0;
-
-                } else {
-
-                    intersection.intersects = false;
-
-                }
-
-            }
-
-            function shoot() {
-
-                position.copy(intersection.point);
-                orientation.copy(mouseHelper.rotation);
-
-                if (params.rotate) orientation.z = Math.random() * 2 * Math.PI;
-
-                const scale = params.minScale + Math.random() * (params.maxScale - params.minScale);
-                size.set(scale, scale, scale);
-
-                const material = decalMaterial.clone();
-                material.color.setHex(Math.random() * 0xffffff);
-
-                const m = new THREE.Mesh(new DecalGeometry(mesh, position, orientation, size), material);
-                m.renderOrder = decals.length; // give decals a fixed render order
-
-                decals.push(m);
-                scene.add(m);
-
-            }
-
-
-
-
-
             modelViewer.addEventListener('click', (event) => {
-                var matSelected = event.target.materialFromPoint(event.clientX, event.clientY);
-                if (!matSelected) return;
+
+                var matSelected = elm.target.materialFromPoint(event.clientX, event.clientY);
                 console.log(matSelected);
-
-                var meshSelected;
-                scene.traverse(function (object) {
-
-                    if (object.isMesh && object.material && object.material.name.toLowerCase() == matSelected.name.toLowerCase()) {
-                        meshSelected = object;
-                        return;
-                    }
-
-                });
-                console.log(meshSelected);
-
 
                 const mouse = new THREE.Vector2();
                 mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -808,15 +693,19 @@
                 const intersects = raycaster.intersectObjects(scene.children, true);
                 if (intersects.length > 0) {
 
+                    scene.traverse(function (object) {
 
+                        if (object.isMesh) console.log(object);
+
+                    });
                     console.log(intersects)
 
                     const position = intersects[0].point;
                     // Define the decal geometry
-                    const decalGeometry = new DecalGeometry(meshSelected, position, new THREE.Euler(), new THREE.Vector3(1, 1, 1));
+                    const decalGeometry = new DecalGeometry(mesh, position, new THREE.Euler(), new THREE.Vector3(20, 20, 20));
 
                     // Create the decal mesh
-                    const decalMesh = new THREE.Mesh(decalGeometry, decalMaterial.clone());
+                    const decalMesh = new THREE.Mesh(decalGeometry, decalMaterial);
 
                     scene.add(decalMesh);
                 }
