@@ -106,7 +106,7 @@
             </div>
             <div class="col-12 col-md-5 col-lg-7 col-xl-8 p-3" style="height: 100vh;">
                 <model-viewer id="model-main" class="w-100 h-100" alt=""
-                    src="./assets/model-glb/cresent_witch_clothes.glb" ar shadow-intensity="1" camera-controls disable-pan
+                    src="./assets/model-glb/first_clothing_item.glb" ar shadow-intensity="1" camera-controls disable-pan
                     disable-tap auto-rotate autoplay shadow-softness="0.1" min-camera-orbit="auto auto 50%"
                     max-camera-orbit="auto auto 300%">
                 </model-viewer>
@@ -323,7 +323,8 @@
         {
           "imports": {
             "three": "https://unpkg.com/three@^0.158.0/build/three.module.js",
-            "three/addons/geometries/DecalGeometry.js": "https://unpkg.com/three@^0.158.0/examples/jsm/geometries/DecalGeometry.js"
+            "three/addons/geometries/DecalGeometry.js": "https://unpkg.com/three@^0.158.0/examples/jsm/geometries/DecalGeometry.js",
+            "three/addons/loaders/GLTFLoader.js": "https://unpkg.com/three@^0.158.0/examples/jsm/loaders/GLTFLoader.js"
           }
         }
     </script>
@@ -649,12 +650,13 @@
     <script type="module">
         import * as THREE from 'three';
         import { DecalGeometry } from 'three/addons/geometries/DecalGeometry.js';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
         // Define the decal material
         const textureLoader = new THREE.TextureLoader();
-        const decalDiffuse = textureLoader.load('./assets/images/product-1.jpg');
+        const decalDiffuse = textureLoader.load('./assets/images/choose-1.jpg');
         decalDiffuse.colorSpace = THREE.SRGBColorSpace;
-        const decalNormal = textureLoader.load('./assets/images/product-2.jpg');
+        const decalNormal = textureLoader.load('./assets/images/choose-1.jpg');
 
         const decalMaterial = new THREE.MeshPhongMaterial({
             specular: 0x444444,
@@ -672,47 +674,68 @@
 
         var modelViewer = document.getElementById('model-main');
 
+        //lấy tên scene model
+        var nameScene = "Sketchfab_Scene";
+        new GLTFLoader().load('./assets/model-glb/first_clothing_item.glb', function (gltf) {
+            console.log(gltf.scene);
+        })
+
+
         modelViewer.addEventListener('load', (elm) => {
             var scene = elm.target[Object.getOwnPropertySymbols(elm.target).find(e => e.description === 'scene')];
+            console.log(scene)
+            var gltfScene = scene.getObjectByName(nameScene);
+            console.log(gltfScene);
+
+
 
             let mesh;
+
+            gltfScene.traverse(function (object) {
+
+                if (object.isMesh && object.name == "defaultMaterial") {
+                    mesh = object;
+                    console.log(mesh);
+
+                    return;
+
+                }
+
+            });
+
+
             let raycaster;
             let line;
+            const decals = []; // lịch sử in
+            const intersects = [];
 
+            const mouse = new THREE.Vector2();
+            const position = new THREE.Vector3();
+            const orientation = new THREE.Euler();
+            const size = new THREE.Vector3(10, 10, 10);
+
+            let mouseHelper;
+            const params = {
+                minScale: 10,
+                maxScale: 20,
+                rotate: true,
+            };
             const intersection = {
                 intersects: false,
                 point: new THREE.Vector3(),
                 normal: new THREE.Vector3()
-            };
-            const mouse = new THREE.Vector2();
-            const intersects = [];
-
-            const decals = [];
-            let mouseHelper;
-            const position = new THREE.Vector3();
-            const orientation = new THREE.Euler();
-            const size = new THREE.Vector3(1, 1, 1);
-            const params = {
-                minScale: 0.01,
-                maxScale: 10,
-                rotate: true,
-                clear: function () {
-
-                    removeDecals();
-
-                }
             };
 
             const geometry = new THREE.BufferGeometry();
             geometry.setFromPoints([new THREE.Vector3(), new THREE.Vector3()]);
 
             line = new THREE.Line(geometry, new THREE.LineBasicMaterial());
-            scene.add(line);
+            gltfScene.add(line);
             raycaster = new THREE.Raycaster();
 
             mouseHelper = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 10), new THREE.MeshNormalMaterial());
             mouseHelper.visible = false;
-            scene.add(mouseHelper);
+            gltfScene.add(mouseHelper);
 
 
 
@@ -767,10 +790,7 @@
                 const scale = params.minScale + Math.random() * (params.maxScale - params.minScale);
                 size.set(scale, scale, scale);
 
-                const material = decalMaterial.clone();
-                material.color.setHex(Math.random() * 0xffffff);
-
-                const m = new THREE.Mesh(new DecalGeometry(mesh, position, orientation, size), material);
+                const m = new THREE.Mesh(new DecalGeometry(mesh, position, orientation, size), decalMaterial.clone());
                 m.renderOrder = decals.length; // give decals a fixed render order
 
                 decals.push(m);
@@ -779,30 +799,34 @@
             }
 
 
-
-
-
             modelViewer.addEventListener('pointerdown', (event) => {
-                var matSelected = event.target.materialFromPoint(event.clientX, event.clientY);
-                if (!matSelected) return;
-                console.log(matSelected);
+                // var matSelected = event.target.materialFromPoint(event.clientX, event.clientY);
+                // if (!matSelected) return;
 
-                scene.traverse(function (object) {
+                // scene.traverse(function (object) {
 
-                    if (object.isMesh && object.material && object.material.name.toLowerCase() == matSelected.name.toLowerCase()) {
-                        mesh = object;
-                        return;
-                    }
+                //     if (object.isMesh && object.material && object.material.name.toLowerCase() == matSelected.name.toLowerCase()) {
+                //         mesh = object;
 
-                });
+                //         scene.add(mesh);
+
+                // meshSelected.scale.set(1, 1, 1);
+
 
                 checkIntersection(event.clientX, event.clientY);
 
                 if (intersection.intersects) shoot();
+                //         return;
+                //     }
+
+                // });
 
 
             })
         })
+
+
+
 
 
 
