@@ -321,14 +321,14 @@
 
     <script type="importmap">
         {
-          "imports": {
-            "three": "https://unpkg.com/three@^0.158.0/build/three.module.js",
-            "three/addons/geometries/DecalGeometry.js": "https://unpkg.com/three@^0.158.0/examples/jsm/geometries/DecalGeometry.js",
-            "three/addons/loaders/GLTFLoader.js": "https://unpkg.com/three@^0.158.0/examples/jsm/loaders/GLTFLoader.js"
-          }
+            "imports": {
+                "three": "https://unpkg.com/three@^0.158.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@^0.158.0/examples/jsm/"
+            }
         }
     </script>
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js">
+    </script>
 
     <script type="module">
 
@@ -645,8 +645,21 @@
                 this.init();
             },
         });
-
     </script>
+
+    <script>
+        async function exportGLB() {
+            const modelViewer = document.getElementById("model-main");
+            const glTF = await modelViewer.exportScene();
+            const file = new File([glTF], "export.glb");
+            const link = document.createElement("a");
+            link.download = file.name;
+            link.href = URL.createObjectURL(file);
+            link.click();
+        }
+    </script>
+
+
     <script type="module">
         import * as THREE from 'three';
         import { DecalGeometry } from 'three/addons/geometries/DecalGeometry.js';
@@ -658,12 +671,12 @@
         decalDiffuse.colorSpace = THREE.SRGBColorSpace;
         const decalNormal = textureLoader.load('./assets/images/choose-1.jpg');
 
-        const decalMaterial = new THREE.MeshPhongMaterial({
-            specular: 0x444444,
+        const decalMaterial = new THREE.MeshStandardMaterial({
+            // specular: 0x444444,
             map: decalDiffuse,
             normalMap: decalNormal,
             normalScale: new THREE.Vector2(1, 1),
-            shininess: 30,
+            // shininess: 30,
             transparent: true,
             depthTest: true,
             depthWrite: false,
@@ -674,36 +687,10 @@
 
         var modelViewer = document.getElementById('model-main');
 
-        //lấy tên scene model
-        var nameScene = "Sketchfab_Scene";
-        new GLTFLoader().load('./assets/model-glb/first_clothing_item.glb', function (gltf) {
-            console.log(gltf.scene);
-        })
-
-
         modelViewer.addEventListener('load', (elm) => {
             var scene = elm.target[Object.getOwnPropertySymbols(elm.target).find(e => e.description === 'scene')];
-            console.log(scene)
-            var gltfScene = scene.getObjectByName(nameScene);
-            console.log(gltfScene);
-
-
 
             let mesh;
-
-            gltfScene.traverse(function (object) {
-
-                if (object.isMesh && object.name == "defaultMaterial") {
-                    mesh = object;
-                    console.log(mesh);
-
-                    return;
-
-                }
-
-            });
-
-
             let raycaster;
             let line;
             const decals = []; // lịch sử in
@@ -712,11 +699,11 @@
             const mouse = new THREE.Vector2();
             const position = new THREE.Vector3();
             const orientation = new THREE.Euler();
-            const size = new THREE.Vector3(10, 10, 10);
+            const size = new THREE.Vector3(1, 1, 1);
 
             let mouseHelper;
             const params = {
-                minScale: 10,
+                minScale: 0.1,
                 maxScale: 20,
                 rotate: true,
             };
@@ -730,12 +717,12 @@
             geometry.setFromPoints([new THREE.Vector3(), new THREE.Vector3()]);
 
             line = new THREE.Line(geometry, new THREE.LineBasicMaterial());
-            gltfScene.add(line);
+            scene.add(line);
             raycaster = new THREE.Raycaster();
 
             mouseHelper = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 10), new THREE.MeshNormalMaterial());
             mouseHelper.visible = false;
-            gltfScene.add(mouseHelper);
+            scene.add(mouseHelper);
 
 
 
@@ -799,27 +786,28 @@
             }
 
 
-            modelViewer.addEventListener('pointerdown', (event) => {
-                // var matSelected = event.target.materialFromPoint(event.clientX, event.clientY);
-                // if (!matSelected) return;
+            modelViewer.addEventListener('click', (event) => {
+                var matSelected = event.target.materialFromPoint(event.clientX, event.clientY);
+                if (!matSelected) return;
 
-                // scene.traverse(function (object) {
+                var meshSelected;
+                scene.traverse(function (object) {
 
-                //     if (object.isMesh && object.material && object.material.name.toLowerCase() == matSelected.name.toLowerCase()) {
-                //         mesh = object;
+                    if (object.isMesh && object.material && object.material.name.toLowerCase() == matSelected.name.toLowerCase()) {
+                        meshSelected = object;
+                    }
 
-                //         scene.add(mesh);
+                });
 
-                // meshSelected.scale.set(1, 1, 1);
+                if(!mesh || mesh.name != meshSelected.name){
+                    mesh = meshSelected;
+                }
 
 
                 checkIntersection(event.clientX, event.clientY);
 
                 if (intersection.intersects) shoot();
-                //         return;
-                //     }
-
-                // });
+                return;
 
 
             })
