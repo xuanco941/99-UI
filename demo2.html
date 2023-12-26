@@ -106,8 +106,8 @@
             </div>
             <div class="col-12 col-md-5 col-lg-7 col-xl-8 p-3" style="height: 100vh;">
                 <model-viewer id="model-main" class="w-100 h-100" alt=""
-                    src="./assets/model-glb/cresent_witch_clothes.glb" ar shadow-intensity="1" camera-controls disable-pan
-                    disable-tap auto-rotate autoplay shadow-softness="0.1" min-camera-orbit="auto auto 50%"
+                    src="./assets/model-glb/cresent_witch_clothes.glb" ar shadow-intensity="1" camera-controls
+                    disable-pan disable-tap autoplay shadow-softness="0.1" min-camera-orbit="auto auto 50%"
                     max-camera-orbit="auto auto 300%">
                 </model-viewer>
             </div>
@@ -331,6 +331,7 @@
     </script>
 
     <script type="module">
+        import * as THREE from 'three';
 
         import { SearchImages } from './assets/js/search-image.js';
         // console.log(await SearchImages('cat', 10, 1));
@@ -606,6 +607,37 @@
                     self.modelViewer = document.getElementById("model-main");
                     self.modelViewer.addEventListener('load', (e) => {
                         self.model = e.target;
+                        e.target.model.materials.forEach(elm => {
+                            //đại diện cho màu sắc cơ bản của vật liệu mà không có thông tin về ánh sáng hoặc bóng.
+                            var map = new THREE.TextureLoader().load('houndstooth-fabric-weave-bl/houndstooth-fabric-weave_albedo.png');
+                            //mô phỏng cách ánh sáng tương tác với môi trường xung quanh
+                            var aoMap = new THREE.TextureLoader().load('houndstooth-fabric-weave-bl/houndstooth-fabric-weave_ao.png');
+                            //sử dụng để tạo ra chi tiết đồ họa
+                            var normalMap = new THREE.TextureLoader().load('houndstooth-fabric-weave-bl/houndstooth-fabric-weave_normal-ogl.png');
+                            // xác định độ nhám
+                            var roughnessMap = new THREE.TextureLoader().load('houndstooth-fabric-weave-bl/houndstooth-fabric-weave_Roughness.png');
+                            // xác định vị trí của các vùng kim loại trong vật liệu
+                            var metalnessMap = new THREE.TextureLoader().load('houndstooth-fabric-weave-bl/houndstooth-fabric-weave_metallic.png');
+                            //thông tin về chiều cao của bề mặt vật liệu
+                            var displacementMap = new THREE.TextureLoader().load('houndstooth-fabric-weave-bl/houndstooth-fabric-weave_height.png');
+
+                            var obj = Object.getOwnPropertySymbols(elm.pbrMetallicRoughness.metallicRoughnessTexture);
+                            var materials = elm.pbrMetallicRoughness.metallicRoughnessTexture[obj.find(e => e.description === 'materials')];
+                            // materials.clear();
+                            // materials.add(material);
+                            // materials=material;
+                            materials.forEach(a => {
+                                // a.map = map;
+                                a.aoMap = aoMap;
+                                a.normalMap = normalMap;
+                                a.roughnessMap = roughnessMap;
+                                a.metalnessMap = metalnessMap;
+                                // a.displacementMap = displacementMap;
+                            })
+
+                            console.log(elm.pbrMetallicRoughness);
+
+                        });
                     });
 
                     await self.getListMetallicRoughness();
@@ -797,7 +829,7 @@
 
                 });
 
-                if(!mesh || mesh.name != meshSelected.name){
+                if (!mesh || mesh.name != meshSelected.name) {
                     mesh = meshSelected;
                 }
 
